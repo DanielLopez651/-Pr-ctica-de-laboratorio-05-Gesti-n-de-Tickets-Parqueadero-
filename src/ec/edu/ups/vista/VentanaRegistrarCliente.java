@@ -1,9 +1,12 @@
-
 package ec.edu.ups.vista;
 
+import javax.swing.JOptionPane;
+import ec.edu.ups.modelo.Cliente;
+import ec.edu.ups.controlador.ControladorCliente;
+       
 
 public class VentanaRegistrarCliente extends javax.swing.JInternalFrame {
-
+ControladorCliente controladorCliente;
     public VentanaRegistrarCliente() {
         initComponents();
     }
@@ -29,6 +32,7 @@ public class VentanaRegistrarCliente extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
 
         setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);

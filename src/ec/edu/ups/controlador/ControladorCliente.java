@@ -1,14 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ec.edu.ups.controlador;
+import ec.edu.ups.dao.*;
 
-/**
- *
- * @author user
- */
+import ec.edu.ups.modelo.Cliente;
 public class ControladorCliente {
+    private ClienteDAO clienteDao;
+    private VehiculoDAO vehiculoDao;
+    private Cliente cliente;
+
+    public ControladorCliente(ClienteDAO clienteDao, VehiculoDAO vehiculoDao) {
+        this.clienteDao = clienteDao;
+        this.vehiculoDao = vehiculoDao;
+    }
+
+    
+    
     
 }

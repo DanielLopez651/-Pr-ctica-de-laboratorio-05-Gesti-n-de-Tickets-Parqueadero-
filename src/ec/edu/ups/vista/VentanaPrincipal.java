@@ -1,15 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ec.edu.ups.vista;
 
 import javax.swing.JOptionPane;
 
 
 public class VentanaPrincipal extends javax.swing.JFrame {
-
+VentanaRegistrarCliente ventanaRegistrarCliente= new VentanaRegistrarCliente();
    
     public VentanaPrincipal() {
         initComponents();
@@ -42,6 +38,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         menuItemRegistrarse.setMnemonic('o');
         menuItemRegistrarse.setText("Registarse");
+        menuItemRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemRegistrarseActionPerformed(evt);
+            }
+        });
         menuItemIngreso.add(menuItemRegistrarse);
 
         menuItemSalirI.setMnemonic('x');
@@ -93,13 +94,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -118,15 +119,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_menuItemRegresarSalidaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void menuItemRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRegistrarseActionPerformed
+        desktopPane.add(ventanaRegistrarCliente);
+        ventanaRegistrarCliente.setVisible(true);
+    }//GEN-LAST:event_menuItemRegistrarseActionPerformed
+
+   
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+       
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
