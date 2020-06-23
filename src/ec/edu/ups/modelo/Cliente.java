@@ -6,6 +6,7 @@
 package ec.edu.ups.modelo;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -99,6 +100,16 @@ public class Cliente {
             Vehiculo v =vehiculos.get(i);
             if(v.getPlaca().equals(vehiculo.getPlaca())){
                 vehiculos.set(i, vehiculo);
+                break;
+            }
+        }
+    }
+            public void eliminarVehiculo(Vehiculo vehiculo) {
+        Iterator<Vehiculo> it = vehiculos.iterator();
+        while (it.hasNext()) {
+            Vehiculo t = it.next();
+            if (t.getPlaca().equals(vehiculo.getPlaca()) ) {
+                it.remove();
                 break;
             }
         }
