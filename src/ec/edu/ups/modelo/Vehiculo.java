@@ -5,6 +5,9 @@
  */
 package ec.edu.ups.modelo;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -15,16 +18,22 @@ public class Vehiculo {
     private String placa;
     private String marca;
     private String modelo;
-
+ private List<Ticket> ticketes;
     public Vehiculo() {
+         ticketes = new ArrayList<>();
     }
 
     public Vehiculo(String placa, String marca, String modelo) {
         this.placa = placa;
         this.marca = marca;
         this.modelo = modelo;
+        ticketes = new ArrayList<>();
     }
 
+    public List<Ticket> getTicketes() {
+        return ticketes;
+    }
+    
     public String getPlaca() {
         return placa;
     }
@@ -72,6 +81,41 @@ public class Vehiculo {
             return false;
         }
         return true;
+    }
+    public void agregarTicket(Ticket ticket){
+        ticketes.add(ticket);
+    }
+//Actualiza el telefono ingresado en la lista telefonos
+    public void actualizarTicket(Ticket ticket) {
+        for (int i = 0; i <ticketes.size(); i++) {
+            Ticket t =ticketes.get(i);
+            if(t.getNumeroT()==ticket.getNumeroT()){
+                ticketes.set(i, ticket);
+                break;
+            }
+        }
+    }
+
+    //Elimina el telefono ingresado de la lista telefonos
+    public void eliminarTelefono(Ticket ticket) {
+        Iterator<Ticket> it = ticketes.iterator();
+        while (it.hasNext()) {
+            Ticket t = it.next();
+            if (t.getNumeroT()== ticket.getNumeroT()) {
+                it.remove();
+                break;
+            }
+        }
+    }
+
+    //Busca el Telefono correspondiente al codigo ingresado
+    public Ticket buscarTelefono(int codigo) {
+        return ticketes.get(codigo);
+    }
+
+    //debuelve la lista telefonos
+    public List<Ticket> listarTelefonos() {
+        return ticketes;
     }
 
     @Override
