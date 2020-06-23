@@ -7,10 +7,7 @@ package ec.edu.ups.vista;
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author user
- */
+
 public class VentanaPrincipal extends javax.swing.JFrame {
 
    
