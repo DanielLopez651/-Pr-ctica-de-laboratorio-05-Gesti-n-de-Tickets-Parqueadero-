@@ -11,7 +11,7 @@ public class ClienteDAO implements IClienteDAO{
 
     @Override
     public Cliente read(String cedula) {
-       
+       return null;
     }
 
     @Override
@@ -26,7 +26,7 @@ public class ClienteDAO implements IClienteDAO{
 
     @Override
     public List<Cliente> findAll() {
-        
+        return null;
     }
     
 }

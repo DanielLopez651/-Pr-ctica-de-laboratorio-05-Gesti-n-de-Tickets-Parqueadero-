@@ -89,10 +89,10 @@ public class Vehiculo {
     public void actualizarTicket(Ticket ticket) {
         for (int i = 0; i <ticketes.size(); i++) {
             Ticket t =ticketes.get(i);
-            if(t.getNumeroT()==ticket.getNumeroT()){
-                ticketes.set(i, ticket);
-                break;
-            }
+//            if(t.getNumeroT()==ticket.getNumeroT()){
+//                ticketes.set(i, ticket);
+//                break;
+//            }
         }
     }
 
@@ -101,10 +101,10 @@ public class Vehiculo {
         Iterator<Ticket> it = ticketes.iterator();
         while (it.hasNext()) {
             Ticket t = it.next();
-            if (t.getNumeroT()== ticket.getNumeroT()) {
-                it.remove();
-                break;
-            }
+//            if (t.getNumeroT()== ticket.getNumeroT()) {
+//                it.remove();
+//                break;
+//            }
         }
     }
 
