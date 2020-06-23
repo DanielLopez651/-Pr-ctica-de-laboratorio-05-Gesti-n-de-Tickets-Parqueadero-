@@ -5,6 +5,8 @@
  */
 package ec.edu.ups.modelo;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -16,8 +18,9 @@ public class Cliente {
     private String nombre;
     private String direccion;
     private String telefono;
-
+    private List<Vehiculo> vehiculos;
     public Cliente() {
+         vehiculos = new ArrayList<>();
     }
 
     public Cliente(String cedula, String nombre, String direccion, String telefono) {
@@ -25,6 +28,11 @@ public class Cliente {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
+        vehiculos = new ArrayList<>();
+    }
+
+    public List<Vehiculo> getVehiculos() {
+        return vehiculos;
     }
 
     public String getCedula() {
@@ -82,6 +90,18 @@ public class Cliente {
             return false;
         }
         return true;
+    }
+     public void agregarVehiculo(Vehiculo vehiculo){
+        vehiculos.add(vehiculo);
+     }
+        public void actualizarVehiculo(Vehiculo  vehiculo) {
+        for (int i = 0; i <vehiculos.size(); i++) {
+            Vehiculo v =vehiculos.get(i);
+            if(v.getPlaca().equals(vehiculo.getPlaca())){
+                vehiculos.set(i, vehiculo);
+                break;
+            }
+        }
     }
 
     @Override
