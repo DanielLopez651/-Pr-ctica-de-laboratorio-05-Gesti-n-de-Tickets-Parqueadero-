@@ -16,7 +16,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
    
     public VentanaPrincipal() {
         initComponents();
-        
+        System.out.println("hola");
     }
 
  
