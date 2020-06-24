@@ -3,12 +3,18 @@ package ec.edu.ups.vista;
 import javax.swing.JOptionPane;
 import ec.edu.ups.modelo.Cliente;
 import ec.edu.ups.controlador.ControladorCliente;
-       
+import ec.edu.ups.dao.*;
+
 
 public class VentanaRegistrarCliente extends javax.swing.JInternalFrame {
-ControladorCliente controladorCliente;
-    public VentanaRegistrarCliente() {
+//ControladorCliente controladorCliente;
+
+ 
+ClienteDAO clienteDao= new ClienteDAO();
+        VehiculoDAO vehiculoDao=new VehiculoDAO();
+    public VentanaRegistrarCliente(ControladorCliente controladorCliente) {
         initComponents();
+      //  this.controladorCliente = controladorCliente;
     }
 
     /**
@@ -47,6 +53,11 @@ ControladorCliente controladorCliente;
         jLabel4.setText("Telefono");
 
         jButton1.setText("Registrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -115,6 +126,20 @@ ControladorCliente controladorCliente;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        ControladorCliente controladorCliente=new ControladorCliente(clienteDao, vehiculoDao);
+        controladorCliente.registrar(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText());
+        JOptionPane.showMessageDialog(this, "Usuario creado");
+        
+       jTextField1.setText("");
+       jTextField2.setText("");
+       jTextField3.setText("");
+       jTextField4.setText("");
+       this.dispose();;
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

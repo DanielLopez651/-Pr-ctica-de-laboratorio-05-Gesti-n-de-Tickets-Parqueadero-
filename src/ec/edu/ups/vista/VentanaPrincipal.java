@@ -2,14 +2,18 @@
 package ec.edu.ups.vista;
 
 import javax.swing.JOptionPane;
-
+import ec.edu.ups.controlador.ControladorCliente;
+import ec.edu.ups.dao.*;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
-VentanaRegistrarCliente ventanaRegistrarCliente= new VentanaRegistrarCliente();
+VentanaRegistrarCliente ventanaRegistrarCliente;
+ControladorCliente controladorCliente;
+
    
     public VentanaPrincipal() {
         initComponents();
-        System.out.println("hola");
+        this.setLocationRelativeTo(null);
+       ventanaRegistrarCliente=new VentanaRegistrarCliente(controladorCliente);
       
     }
 

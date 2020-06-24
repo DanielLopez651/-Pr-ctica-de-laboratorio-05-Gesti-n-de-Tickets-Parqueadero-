@@ -67,6 +67,10 @@ public class Cliente {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+    
+    public void setVehiculos(Vehiculo veiculo){
+        this.vehiculos.add(veiculo);
+    }
 
     @Override
     public int hashCode() {
