@@ -19,10 +19,10 @@ public class VentanaIniciarSesion extends javax.swing.JInternalFrame {
     private VentanaRegistrarVehiculo ventanaRegistrarVehiculo;
     
     public VentanaIniciarSesion(ControladorCliente controladorCliente, VentanaPrincipal ventanaPrincipal) {
+        
+        initComponents();
         this.ventanaPrincipal = ventanaPrincipal;
         this.controladorCliente = controladorCliente;
-        initComponents();
-        
     }
 
     /**
@@ -121,12 +121,12 @@ public class VentanaIniciarSesion extends javax.swing.JInternalFrame {
         } else {
             if (controladorCliente.validarCliente(txtCedula.getText())) {
                 ventanaPrincipal.getMenuItemCerrarSesion().setVisible(true);
-                ventanaPrincipal.getRegistrarMenuItem().setVisible(true);
+                ventanaPrincipal.getRegistrarMenuItem().setVisible(false);
                 ventanaPrincipal.getRegistrarVehiculoItem().setVisible(true);
                 ventanaPrincipal.getRegistrarMenuItem().setVisible(false);
                 ventanaPrincipal.getIniciarMenuItem().setVisible(false);
                 limpiar();
-                dispose();
+                this.setVisible(false);
                 
                 
                 JOptionPane.showMessageDialog(this, "Bienvenido de nuevo");
