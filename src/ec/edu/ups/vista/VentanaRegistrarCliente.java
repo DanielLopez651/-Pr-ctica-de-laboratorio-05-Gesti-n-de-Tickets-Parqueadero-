@@ -7,14 +7,23 @@ import ec.edu.ups.dao.*;
 
 
 public class VentanaRegistrarCliente extends javax.swing.JInternalFrame {
-//ControladorCliente controladorCliente;
+    private ControladorCliente controladorCliente;
+    private VentanaPrincipal ventanaPrincipal;
+    private VentanaIniciarSesion ventanaIniciarSesion;
+ private ClienteDAO clienteDAO;
+private VehiculoDAO vehiculoDAO;
+private TicketDAO ticketDAO;
 
  
-ClienteDAO clienteDao= new ClienteDAO();
-        VehiculoDAO vehiculoDao=new VehiculoDAO();
-    public VentanaRegistrarCliente(ControladorCliente controladorCliente) {
+
+    public VentanaRegistrarCliente(ControladorCliente controladorCliente,VentanaPrincipal ventanaPrincipal) {
         initComponents();
-      //  this.controladorCliente = controladorCliente;
+        
+      this.controladorCliente = controladorCliente;
+     clienteDAO= new ClienteDAO();
+        vehiculoDAO=new VehiculoDAO();
+       
+       
     }
 
     /**
@@ -31,11 +40,12 @@ ClienteDAO clienteDao= new ClienteDAO();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtCedula = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        txtDireccion = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
+        btnRegistarCliente = new javax.swing.JButton();
+        btnCerrar = new javax.swing.JButton();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
@@ -44,7 +54,7 @@ ClienteDAO clienteDao= new ClienteDAO();
         setResizable(true);
         setTitle("Registro");
 
-        jLabel1.setText("Cedula:");
+        jLabel1.setText("Cedula");
 
         jLabel2.setText("Nombre");
 
@@ -52,10 +62,18 @@ ClienteDAO clienteDao= new ClienteDAO();
 
         jLabel4.setText("Telefono");
 
-        jButton1.setText("Registrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistarCliente.setBackground(new java.awt.Color(204, 255, 153));
+        btnRegistarCliente.setText("Registrar");
+        btnRegistarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnRegistarClienteActionPerformed(evt);
+            }
+        });
+
+        btnCerrar.setText("Cerrar");
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
             }
         });
 
@@ -73,14 +91,16 @@ ClienteDAO clienteDao= new ClienteDAO();
                         .addComponent(jLabel3)))
                 .addGap(104, 104, 104)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField3)
-                    .addComponent(jTextField4))
+                    .addComponent(txtCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(txtNombre)
+                    .addComponent(txtDireccion)
+                    .addComponent(txtTelefono))
                 .addContainerGap(153, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnCerrar)
+                .addGap(18, 18, 18)
+                .addComponent(btnRegistarCliente)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -89,21 +109,23 @@ ClienteDAO clienteDao= new ClienteDAO();
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegistarCliente)
+                    .addComponent(btnCerrar))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
@@ -127,31 +149,44 @@ ClienteDAO clienteDao= new ClienteDAO();
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        ControladorCliente controladorCliente=new ControladorCliente(clienteDao, vehiculoDao);
-        controladorCliente.registrar(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText());
+    private void btnRegistarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistarClienteActionPerformed
+        String cedula=txtCedula.getText();
+         String nombre=txtNombre.getText();
+         String direccion= txtDireccion.getText();
+         String telefono=txtTelefono.getText();
+        if(cedula.isEmpty()||nombre.isEmpty()||direccion.isEmpty()||telefono.isEmpty()){
+             JOptionPane.showMessageDialog(this, "¡Llene todos los campos solicitados!");
+        }else{
+            controladorCliente.registrar(cedula, nombre, direccion, telefono);
         JOptionPane.showMessageDialog(this, "Usuario creado");
         
-       jTextField1.setText("");
-       jTextField2.setText("");
-       jTextField3.setText("");
-       jTextField4.setText("");
-       this.dispose();;
+        limpiar();
+       this.setVisible(false);
+        }
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnRegistarClienteActionPerformed
 
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCerrarActionPerformed
+    public void limpiar(){
+        txtCedula.setText("");
+       txtNombre.setText("");
+       txtDireccion.setText("");
+       txtTelefono.setText(""); 
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnCerrar;
+    private javax.swing.JButton btnRegistarCliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField txtCedula;
+    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

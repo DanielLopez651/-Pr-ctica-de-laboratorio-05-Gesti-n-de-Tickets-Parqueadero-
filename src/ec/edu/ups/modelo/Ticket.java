@@ -9,15 +9,27 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-
-
-
 /**
  *
  * @author user
  */
 public class Ticket {
     private int numeroT;
+
+    public int getNumeroT() {
+        return numeroT;
+    }
+
+    public void setNumeroT(int numeroT) {
+        this.numeroT = numeroT;
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket{" + "numeroT=" + numeroT + '}';
+    }
+
+ 
 
     
 }

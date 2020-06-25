@@ -16,6 +16,7 @@ public class VentanaIniciarSesion extends javax.swing.JInternalFrame {
 
     private VentanaPrincipal ventanaPrincipal;
     private ControladorCliente controladorCliente;
+    private VentanaRegistrarVehiculo ventanaRegistrarVehiculo;
     
     public VentanaIniciarSesion(ControladorCliente controladorCliente, VentanaPrincipal ventanaPrincipal) {
         this.ventanaPrincipal = ventanaPrincipal;
@@ -38,6 +39,7 @@ public class VentanaIniciarSesion extends javax.swing.JInternalFrame {
         btnIniciarSesion = new javax.swing.JButton();
         txtCedula = new javax.swing.JTextField();
 
+        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
@@ -120,17 +122,19 @@ public class VentanaIniciarSesion extends javax.swing.JInternalFrame {
             if (controladorCliente.validarCliente(txtCedula.getText())) {
                 ventanaPrincipal.getMenuItemCerrarSesion().setVisible(true);
                 ventanaPrincipal.getRegistrarMenuItem().setVisible(true);
+                ventanaPrincipal.getRegistrarVehiculoItem().setVisible(true);
                 ventanaPrincipal.getRegistrarMenuItem().setVisible(false);
                 ventanaPrincipal.getIniciarMenuItem().setVisible(false);
                 limpiar();
                 dispose();
+                
+                
                 JOptionPane.showMessageDialog(this, "Bienvenido de nuevo");
             } else {
                 JOptionPane.showMessageDialog(this, "Cedula incorrecta");
             }
         }
-        
-
+                  
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
     public void limpiar() {
         txtCedula.setText("");

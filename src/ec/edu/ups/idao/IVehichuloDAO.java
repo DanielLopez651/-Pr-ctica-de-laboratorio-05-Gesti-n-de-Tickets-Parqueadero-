@@ -5,10 +5,22 @@
  */
 package ec.edu.ups.idao;
 
+import ec.edu.ups.modelo.Cliente;
+import ec.edu.ups.modelo.Vehiculo;
+import java.util.List;
+
 /**
  *
  * @author user
  */
 public interface IVehichuloDAO {
-    
+      public void create(Vehiculo vehiculo);
+
+    public Vehiculo read(String placa);
+
+    public void update(Vehiculo vehiculo);
+
+    public void delete(Vehiculo vehiculo);
+
+    public List<Vehiculo> findAll();
 }

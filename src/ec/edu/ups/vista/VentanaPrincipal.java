@@ -3,19 +3,66 @@ package ec.edu.ups.vista;
 
 import javax.swing.JOptionPane;
 import ec.edu.ups.controlador.ControladorCliente;
+import ec.edu.ups.controlador.ControladorTicket;
+import ec.edu.ups.controlador.ControladorVehiculo;
 import ec.edu.ups.dao.*;
+import javax.swing.JMenuItem;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
-VentanaRegistrarCliente ventanaRegistrarCliente;
-ControladorCliente controladorCliente;
+private VentanaRegistrarCliente ventanaRegistrarCliente;
+private VentanaRegistrarVehiculo ventanaRegistrarVehiculo;
+private VentanaIniciarSesion ventanaIniciarSesion;
+//controladores
+private ControladorCliente controladorCliente;
+private ControladorVehiculo controladorVehiculo;
+private ControladorTicket controladorTicket;
 
+//dao
+private ClienteDAO clienteDAO;
+private VehiculoDAO vehiculoDAO;
+private TicketDAO ticketDAO;
    
     public VentanaPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
-       ventanaRegistrarCliente=new VentanaRegistrarCliente(controladorCliente);
+         //visibilidad
+     
+      registrarVehiculoItem.setVisible(false);
+      MenuItemCerrarSesion.setVisible(false);
       
+      //instancia DAOS
+      clienteDAO=new ClienteDAO();
+      vehiculoDAO= new VehiculoDAO();
+      //instancia controloadores
+      controladorCliente=new ControladorCliente(clienteDAO, vehiculoDAO);
+      controladorVehiculo=new ControladorVehiculo(vehiculoDAO);
+      //instancia las vistas
+        ventanaIniciarSesion=new VentanaIniciarSesion(controladorCliente,this);
+       ventanaRegistrarCliente=new VentanaRegistrarCliente(controladorCliente,this);
+      
+       
+      //añadir a destokpane
+      desktopPane.add(ventanaRegistrarCliente);
+     desktopPane.add(ventanaIniciarSesion);
+     
     }
+
+    public JMenuItem getMenuItemCerrarSesion() {
+        return MenuItemCerrarSesion;
+    }
+
+    public JMenuItem getIniciarMenuItem() {
+        return iniciarMenuItem;
+    }
+
+    public JMenuItem getRegistrarMenuItem() {
+        return registrarMenuItem;
+    }
+
+    public JMenuItem getRegistrarVehiculoItem() {
+        return registrarVehiculoItem;
+    }
+    
 
  
     @SuppressWarnings("unchecked")
@@ -24,8 +71,11 @@ ControladorCliente controladorCliente;
 
         desktopPane = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
-        menuItemIngreso = new javax.swing.JMenu();
-        menuItemRegistrarse = new javax.swing.JMenuItem();
+        ingresoMenu = new javax.swing.JMenu();
+        registrarMenuItem = new javax.swing.JMenuItem();
+        iniciarMenuItem = new javax.swing.JMenuItem();
+        MenuItemCerrarSesion = new javax.swing.JMenuItem();
+        registrarVehiculoItem = new javax.swing.JMenuItem();
         menuItemSalirI = new javax.swing.JMenuItem();
         menuItemSalida = new javax.swing.JMenu();
         menuItemValidarTicket = new javax.swing.JMenuItem();
@@ -34,20 +84,46 @@ ControladorCliente controladorCliente;
         contentMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
 
         desktopPane.setBackground(new java.awt.Color(0, 0, 255));
+        getContentPane().add(desktopPane, java.awt.BorderLayout.CENTER);
 
-        menuItemIngreso.setMnemonic('f');
-        menuItemIngreso.setText("Ingreso");
+        ingresoMenu.setMnemonic('f');
+        ingresoMenu.setText("Ingreso");
 
-        menuItemRegistrarse.setMnemonic('o');
-        menuItemRegistrarse.setText("Registarse");
-        menuItemRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+        registrarMenuItem.setMnemonic('o');
+        registrarMenuItem.setText("Registarse");
+        registrarMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuItemRegistrarseActionPerformed(evt);
+                registrarMenuItemActionPerformed(evt);
             }
         });
-        menuItemIngreso.add(menuItemRegistrarse);
+        ingresoMenu.add(registrarMenuItem);
+
+        iniciarMenuItem.setText("Usuario Recurrente");
+        iniciarMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                iniciarMenuItemActionPerformed(evt);
+            }
+        });
+        ingresoMenu.add(iniciarMenuItem);
+
+        MenuItemCerrarSesion.setText("Cerrar Usuario Recurrente");
+        MenuItemCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemCerrarSesionActionPerformed(evt);
+            }
+        });
+        ingresoMenu.add(MenuItemCerrarSesion);
+
+        registrarVehiculoItem.setText("Registar Vehiculo");
+        registrarVehiculoItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrarVehiculoItemActionPerformed(evt);
+            }
+        });
+        ingresoMenu.add(registrarVehiculoItem);
 
         menuItemSalirI.setMnemonic('x');
         menuItemSalirI.setText("Salir");
@@ -56,9 +132,9 @@ ControladorCliente controladorCliente;
                 menuItemSalirIActionPerformed(evt);
             }
         });
-        menuItemIngreso.add(menuItemSalirI);
+        ingresoMenu.add(menuItemSalirI);
 
-        menuBar.add(menuItemIngreso);
+        menuBar.add(ingresoMenu);
 
         menuItemSalida.setMnemonic('e');
         menuItemSalida.setText("Salida");
@@ -94,20 +170,6 @@ ControladorCliente controladorCliente;
 
         setJMenuBar(menuBar);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -123,10 +185,26 @@ ControladorCliente controladorCliente;
         System.exit(0);
     }//GEN-LAST:event_menuItemRegresarSalidaActionPerformed
 
-    private void menuItemRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRegistrarseActionPerformed
-        desktopPane.add(ventanaRegistrarCliente);
+    private void registrarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarMenuItemActionPerformed
+       
         ventanaRegistrarCliente.setVisible(true);
-    }//GEN-LAST:event_menuItemRegistrarseActionPerformed
+    
+    }//GEN-LAST:event_registrarMenuItemActionPerformed
+
+    private void iniciarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarMenuItemActionPerformed
+        ventanaIniciarSesion.setVisible(true);
+    }//GEN-LAST:event_iniciarMenuItemActionPerformed
+
+    private void MenuItemCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemCerrarSesionActionPerformed
+        MenuItemCerrarSesion.setVisible(false);
+        registrarVehiculoItem.setVisible(false);
+        iniciarMenuItem.setVisible(true);
+        registrarMenuItem.setVisible(true);
+    }//GEN-LAST:event_MenuItemCerrarSesionActionPerformed
+
+    private void registrarVehiculoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarVehiculoItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_registrarVehiculoItemActionPerformed
 
    
     public static void main(String args[]) {
@@ -158,16 +236,19 @@ ControladorCliente controladorCliente;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem MenuItemCerrarSesion;
     private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JMenu ingresoMenu;
+    private javax.swing.JMenuItem iniciarMenuItem;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenu menuItemIngreso;
-    private javax.swing.JMenuItem menuItemRegistrarse;
     private javax.swing.JMenuItem menuItemRegresarSalida;
     private javax.swing.JMenu menuItemSalida;
     private javax.swing.JMenuItem menuItemSalirI;
     private javax.swing.JMenuItem menuItemValidarTicket;
+    private javax.swing.JMenuItem registrarMenuItem;
+    private javax.swing.JMenuItem registrarVehiculoItem;
     // End of variables declaration//GEN-END:variables
 
 }
