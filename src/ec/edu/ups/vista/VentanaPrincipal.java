@@ -6,12 +6,19 @@ import ec.edu.ups.controlador.ControladorCliente;
 import ec.edu.ups.controlador.ControladorTicket;
 import ec.edu.ups.controlador.ControladorVehiculo;
 import ec.edu.ups.dao.*;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import javax.swing.JMenuItem;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
+    Calendar calendario;
+    
+    
+    
 private VentanaRegistrarCliente ventanaRegistrarCliente;
 private VentanaRegistrarVehiculo ventanaRegistrarVehiculo;
 private VentanaIniciarSesion ventanaIniciarSesion;
+private VentanaImprimirTicket ventanaimprimirTicket;
 //controladores
 private ControladorCliente controladorCliente;
 private ControladorVehiculo controladorVehiculo;
@@ -37,13 +44,19 @@ private TicketDAO ticketDAO;
       controladorCliente=new ControladorCliente(clienteDAO, vehiculoDAO);
       controladorVehiculo=new ControladorVehiculo(vehiculoDAO);
       //instancia las vistas
+      ventanaRegistrarVehiculo=new VentanaRegistrarVehiculo(controladorVehiculo,this);
         ventanaIniciarSesion=new VentanaIniciarSesion(controladorCliente,this);
        ventanaRegistrarCliente=new VentanaRegistrarCliente(controladorCliente,this);
+       ventanaimprimirTicket=new VentanaImprimirTicket();
       
        
       //añadir a destokpane
       desktopPane.add(ventanaRegistrarCliente);
      desktopPane.add(ventanaIniciarSesion);
+     
+     
+     calendario=new GregorianCalendar();
+     controladorTicket=new ControladorTicket();
      
     }
 
@@ -141,6 +154,11 @@ private TicketDAO ticketDAO;
 
         menuItemValidarTicket.setMnemonic('t');
         menuItemValidarTicket.setText("Ingrese su ticket");
+        menuItemValidarTicket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemValidarTicketActionPerformed(evt);
+            }
+        });
         menuItemSalida.add(menuItemValidarTicket);
 
         menuItemRegresarSalida.setMnemonic('y');
@@ -203,8 +221,17 @@ private TicketDAO ticketDAO;
     }//GEN-LAST:event_MenuItemCerrarSesionActionPerformed
 
     private void registrarVehiculoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarVehiculoItemActionPerformed
-        // TODO add your handling code here:
+       desktopPane.add(ventanaRegistrarVehiculo);
+       ventanaRegistrarVehiculo.setVisible(true);
     }//GEN-LAST:event_registrarVehiculoItemActionPerformed
+
+    private void menuItemValidarTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemValidarTicketActionPerformed
+        
+        
+        
+        desktopPane.add(ventanaimprimirTicket);
+        ventanaimprimirTicket.setVisible(true);
+    }//GEN-LAST:event_menuItemValidarTicketActionPerformed
 
    
     public static void main(String args[]) {

@@ -19,22 +19,24 @@ public class Vehiculo {
     private String placa;
     private String marca;
     private String modelo;
-    private List<Ticket> ticketes;
+    private Ticket tickete;
 
     public Vehiculo() {
-        ticketes = new ArrayList<>();
+        tickete = new Ticket(0,0,0);
     }
 
-    public Vehiculo(String placa, String marca, String modelo) {
+    public Vehiculo(String placa, String marca, String modelo, Ticket ticket) {
         this.placa = placa;
         this.marca = marca;
         this.modelo = modelo;
-        ticketes = new ArrayList<>();
+        this.tickete=ticket;
+        
     }
 
-    public List<Ticket> getTicketes() {
-        return ticketes;
+    public Ticket getTicketes() {
+        return tickete;
     }
+    
 
     public String getPlaca() {
         return placa;
@@ -85,42 +87,42 @@ public class Vehiculo {
         return true;
     }
 
-    public void agregarTicket(Ticket ticket) {
-        ticketes.add(ticket);
-    }
+//    public void agregarTicket(Ticket ticket) {
+//        ticketes.add(ticket);
+//    }
 //Actualiza el telefono ingresado en la lista telefonos
-
-    public void actualizarTicket(Ticket ticket) {
-        for (int i = 0; i < ticketes.size(); i++) {
-            Ticket t = ticketes.get(i);
-            if (t.getNumeroT() == ticket.getNumeroT()) {
-                ticketes.set(i, ticket);
-                break;
-            }
-        }
-    }
-
-    //Elimina el telefono ingresado de la lista telefonos
-    public void eliminarTicket(Ticket ticket) {
-        Iterator<Ticket> it = ticketes.iterator();
-        while (it.hasNext()) {
-            Ticket t = it.next();
-            if (t.getNumeroT() == ticket.getNumeroT()) {
-                it.remove();
-                break;
-            }
-        }
-    }
-
-    //Busca el Telefono correspondiente al codigo ingresado
-    public Ticket buscarTicket(int ticket) {
-        return ticketes.get(ticket);
-    }
-
-    //debuelve la lista telefonos
-    public List<Ticket> listarTickets() {
-        return ticketes;
-    }
+//
+//    public void actualizarTicket(Ticket ticket) {
+//        for (int i = 0; i < ticketes.size(); i++) {
+//            Ticket t = ticketes.get(i);
+//            if (t.getNumeroT() == ticket.getNumeroT()) {
+//                ticketes.set(i, ticket);
+//                break;
+//            }
+//        }
+//    }
+//
+//    Elimina el telefono ingresado de la lista telefonos
+//    public void eliminarTicket(Ticket ticket) {
+//        Iterator<Ticket> it = ticketes.iterator();
+//        while (it.hasNext()) {
+//            Ticket t = it.next();
+//            if (t.getNumeroT() == ticket.getNumeroT()) {
+//                it.remove();
+//                break;
+//            }
+//        }
+//    }
+//
+//    Busca el Telefono correspondiente al codigo ingresado
+//    public Ticket buscarTicket(int ticket) {
+//        return ticketes.get(ticket);
+//    }
+//
+//    debuelve la lista telefonos
+//    public List<Ticket> listarTickets() {
+//        return ticketes;
+//    }
 
     @Override
     public String toString() {

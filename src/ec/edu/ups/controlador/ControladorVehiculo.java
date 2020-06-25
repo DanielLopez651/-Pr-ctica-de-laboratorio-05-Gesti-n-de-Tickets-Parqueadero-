@@ -7,7 +7,10 @@ package ec.edu.ups.controlador;
 
 import ec.edu.ups.idao.IVehichuloDAO;
 import ec.edu.ups.modelo.Cliente;
-import ec.edu.ups.modelo.Vehiculo;
+import ec.edu.ups.modelo.*;
+import ec.edu.ups.controlador.*;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -18,15 +21,38 @@ public class ControladorVehiculo {
 
     private Vehiculo vehiculo;
     private Cliente cliente;
+    private int numeroVehiculos=0;
+    private Ticket ticket;
+    private ControladorTicket controladorTicket;
     //Objetos DAO
 
     private IVehichuloDAO vehichuloDAO;
 
-    public ControladorVehiculo() {
-    }
+ 
 
     public ControladorVehiculo(IVehichuloDAO vehichuloDAO) {
         this.vehichuloDAO = vehichuloDAO;
+        controladorTicket=new ControladorTicket();
+    }
+    
+    public void registrar(String placa,String marca,String modelo){
+        
+        
+       Calendar calendario=new GregorianCalendar();
+            int hora,minutos;
+            
+            
+            hora=calendario.get(Calendar.HOUR_OF_DAY);
+            minutos = calendario.get(Calendar.MINUTE);
+            numeroVehiculos++;
+            ticket = new  Ticket(hora,minutos,numeroVehiculos);
+           
+            controladorTicket.crearTicket(ticket);
+            
+        vehiculo=new Vehiculo(placa, marca, modelo,ticket);
+        
+        vehichuloDAO.create(vehiculo);
+        
     }
         
 }

@@ -6,13 +6,20 @@
 package ec.edu.ups.vista;
 
 import ec.edu.ups.controlador.ControladorVehiculo;
-
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import ec.edu.ups.controlador.ControladorTicket;
+import ec.edu.ups.vista.*;
+import javax.swing.JOptionPane;
 
 public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
+    ControladorTicket controladorTicket;
+    ControladorVehiculo controladorVehiculo;
     
-    public VentanaRegistrarVehiculo(){
+    public VentanaRegistrarVehiculo(ControladorVehiculo controladorVehiculo, VentanaPrincipal ventanaPrincipal ){
     initComponents();
-    
+    controladorTicket=new ControladorTicket();
+    this.controladorVehiculo=controladorVehiculo;
             }
 
     /**
@@ -127,9 +134,25 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarVehiculoActionPerformed
-        
+            
+            
+            
+            
+            controladorVehiculo.registrar(txtPlaca.getText(),txtMarca.getText(),txtModelo.getText());
+            JOptionPane.showMessageDialog(this, "Vehiculo Registrado");
+            limpiar();
+            this.setVisible(false);
+            
+            
+            
+            
     }//GEN-LAST:event_btnRegistrarVehiculoActionPerformed
-
+public void limpiar(){
+    txtMarca.setText("");
+    txtModelo.setText("");
+    txtPlaca.setText("");
+    
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrarVehiculo;

@@ -15,7 +15,35 @@ import java.util.Date;
  */
 public class Ticket {
     private int numeroT;
+    private int horadeEntrada;
+    private int minutodeEntrada;
 
+    public Ticket(int numeroT, int horadeEntrada, int minutodeEntrada) {
+        this.numeroT = numeroT;
+        this.horadeEntrada = horadeEntrada;
+        this.minutodeEntrada = minutodeEntrada;
+    }
+
+    
+    
+    public int getHoradeEntrada() {
+        return horadeEntrada;
+    }
+
+    public void setHoradeEntrada(int horadeEntrada) {
+        this.horadeEntrada = horadeEntrada;
+    }
+
+    public int getMinutodeEntrada() {
+        return minutodeEntrada;
+    }
+
+    public void setMinutodeEntrada(int minutodeEntrada) {
+        this.minutodeEntrada = minutodeEntrada;
+    }
+
+    
+    
     public int getNumeroT() {
         return numeroT;
     }
