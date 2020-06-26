@@ -1,4 +1,3 @@
-
 package ec.edu.ups.vista;
 
 import javax.swing.JOptionPane;
@@ -11,53 +10,56 @@ import java.util.GregorianCalendar;
 import javax.swing.JMenuItem;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
+
     Calendar calendario;
-    
-    
-    
-private VentanaRegistrarCliente ventanaRegistrarCliente;
-private VentanaRegistrarVehiculo ventanaRegistrarVehiculo;
-private VentanaIniciarSesion ventanaIniciarSesion;
-private VentanaImprimirTicket ventanaimprimirTicket;
+
+    private VentanaRegistrarCliente ventanaRegistrarCliente;
+    private VentanaRegistrarVehiculo ventanaRegistrarVehiculo;
+    private VentanaIniciarSesion ventanaIniciarSesion;
+    private VentanaImprimirTicket ventanaimprimirTicket;
+    private VentanaVehiculos ventanaVehiculos;
 //controladores
-private ControladorCliente controladorCliente;
-private ControladorVehiculo controladorVehiculo;
-private ControladorTicket controladorTicket;
+    private ControladorCliente controladorCliente;
+    private ControladorVehiculo controladorVehiculo;
+    private ControladorTicket controladorTicket;
 
 //dao
-private ClienteDAO clienteDAO;
-private VehiculoDAO vehiculoDAO;
-private TicketDAO ticketDAO;
-   
+    private ClienteDAO clienteDAO;
+    private VehiculoDAO vehiculoDAO;
+    private TicketDAO ticketDAO;
+
     public VentanaPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
-         //visibilidad
-     
-      registrarVehiculoItem.setVisible(false);
-      MenuItemCerrarSesion.setVisible(false);
-      
-      //instancia DAOS
-      clienteDAO=new ClienteDAO();
-      vehiculoDAO= new VehiculoDAO();
-      //instancia controloadores
-      controladorCliente=new ControladorCliente(clienteDAO, vehiculoDAO);
-      controladorVehiculo=new ControladorVehiculo(vehiculoDAO);
-      //instancia las vistas
-      ventanaRegistrarVehiculo=new VentanaRegistrarVehiculo(controladorVehiculo,this);
-        ventanaIniciarSesion=new VentanaIniciarSesion(controladorCliente,this);
-       ventanaRegistrarCliente=new VentanaRegistrarCliente(controladorCliente,this);
-       ventanaimprimirTicket=new VentanaImprimirTicket();
-      
-       
-      //añadir a destokpane
-      desktopPane.add(ventanaRegistrarCliente);
-     desktopPane.add(ventanaIniciarSesion);
-     
-     
-     calendario=new GregorianCalendar();
-     controladorTicket=new ControladorTicket();
-     
+        //visibilidad
+
+        registrarVehiculoItem.setVisible(false);
+        MenuItemCerrarSesion.setVisible(false);
+        menuItemVehiculos.setVisible(false);
+
+        //instancia DAOS
+        clienteDAO = new ClienteDAO();
+        vehiculoDAO = new VehiculoDAO();
+        ticketDAO = new TicketDAO();
+        //instancia controloadores
+        controladorCliente = new ControladorCliente(clienteDAO, vehiculoDAO);
+        controladorVehiculo = new ControladorVehiculo(vehiculoDAO, controladorTicket);
+        controladorTicket = new ControladorTicket(vehiculoDAO, ticketDAO);
+        //instancia las vistas
+        ventanaRegistrarVehiculo = new VentanaRegistrarVehiculo(controladorVehiculo, this);
+        ventanaIniciarSesion = new VentanaIniciarSesion(controladorCliente, this);
+        ventanaRegistrarCliente = new VentanaRegistrarCliente(controladorCliente, this);
+        ventanaimprimirTicket = new VentanaImprimirTicket();
+        ventanaVehiculos = new VentanaVehiculos();
+
+        //añadir a destokpane
+        desktopPane.add(ventanaRegistrarCliente);
+        desktopPane.add(ventanaIniciarSesion);
+        desktopPane.add(ventanaimprimirTicket);
+        desktopPane.add(ventanaRegistrarVehiculo);
+        desktopPane.add(ventanaVehiculos);
+        calendario = new GregorianCalendar();
+
     }
 
     public JMenuItem getMenuItemCerrarSesion() {
@@ -75,9 +77,11 @@ private TicketDAO ticketDAO;
     public JMenuItem getRegistrarVehiculoItem() {
         return registrarVehiculoItem;
     }
-    
 
- 
+    public JMenuItem getMenuItemVehiculos() {
+        return menuItemVehiculos;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -86,9 +90,10 @@ private TicketDAO ticketDAO;
         menuBar = new javax.swing.JMenuBar();
         ingresoMenu = new javax.swing.JMenu();
         registrarMenuItem = new javax.swing.JMenuItem();
-        iniciarMenuItem = new javax.swing.JMenuItem();
-        MenuItemCerrarSesion = new javax.swing.JMenuItem();
         registrarVehiculoItem = new javax.swing.JMenuItem();
+        iniciarMenuItem = new javax.swing.JMenuItem();
+        menuItemVehiculos = new javax.swing.JMenuItem();
+        MenuItemCerrarSesion = new javax.swing.JMenuItem();
         menuItemSalirI = new javax.swing.JMenuItem();
         menuItemSalida = new javax.swing.JMenu();
         menuItemValidarTicket = new javax.swing.JMenuItem();
@@ -114,6 +119,14 @@ private TicketDAO ticketDAO;
         });
         ingresoMenu.add(registrarMenuItem);
 
+        registrarVehiculoItem.setText("Registar Vehiculo");
+        registrarVehiculoItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrarVehiculoItemActionPerformed(evt);
+            }
+        });
+        ingresoMenu.add(registrarVehiculoItem);
+
         iniciarMenuItem.setText("Usuario Recurrente");
         iniciarMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,6 +135,14 @@ private TicketDAO ticketDAO;
         });
         ingresoMenu.add(iniciarMenuItem);
 
+        menuItemVehiculos.setText("Sus Vehiculos");
+        menuItemVehiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemVehiculosActionPerformed(evt);
+            }
+        });
+        ingresoMenu.add(menuItemVehiculos);
+
         MenuItemCerrarSesion.setText("Cerrar Usuario Recurrente");
         MenuItemCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,14 +150,6 @@ private TicketDAO ticketDAO;
             }
         });
         ingresoMenu.add(MenuItemCerrarSesion);
-
-        registrarVehiculoItem.setText("Registar Vehiculo");
-        registrarVehiculoItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrarVehiculoItemActionPerformed(evt);
-            }
-        });
-        ingresoMenu.add(registrarVehiculoItem);
 
         menuItemSalirI.setMnemonic('x');
         menuItemSalirI.setText("Salir");
@@ -196,7 +209,7 @@ private TicketDAO ticketDAO;
     }//GEN-LAST:event_menuItemSalirIActionPerformed
 
     private void helpMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpMenuActionPerformed
-     
+
     }//GEN-LAST:event_helpMenuActionPerformed
 
     private void menuItemRegresarSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRegresarSalidaActionPerformed
@@ -204,13 +217,14 @@ private TicketDAO ticketDAO;
     }//GEN-LAST:event_menuItemRegresarSalidaActionPerformed
 
     private void registrarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarMenuItemActionPerformed
-       
+
         ventanaRegistrarCliente.setVisible(true);
-    
+
     }//GEN-LAST:event_registrarMenuItemActionPerformed
 
     private void iniciarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarMenuItemActionPerformed
         ventanaIniciarSesion.setVisible(true);
+        menuItemVehiculos.setVisible(true);
     }//GEN-LAST:event_iniciarMenuItemActionPerformed
 
     private void MenuItemCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemCerrarSesionActionPerformed
@@ -218,24 +232,25 @@ private TicketDAO ticketDAO;
         registrarVehiculoItem.setVisible(false);
         iniciarMenuItem.setVisible(true);
         registrarMenuItem.setVisible(true);
+        menuItemVehiculos.setVisible(false);
     }//GEN-LAST:event_MenuItemCerrarSesionActionPerformed
 
     private void registrarVehiculoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarVehiculoItemActionPerformed
-       desktopPane.add(ventanaRegistrarVehiculo);
-       ventanaRegistrarVehiculo.setVisible(true);
+        ventanaRegistrarVehiculo.setVisible(true);
+
     }//GEN-LAST:event_registrarVehiculoItemActionPerformed
 
     private void menuItemValidarTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemValidarTicketActionPerformed
-        
-        
-        
-        desktopPane.add(ventanaimprimirTicket);
+
         ventanaimprimirTicket.setVisible(true);
     }//GEN-LAST:event_menuItemValidarTicketActionPerformed
 
-   
+    private void menuItemVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVehiculosActionPerformed
+        ventanaVehiculos.setVisible(true);
+    }//GEN-LAST:event_menuItemVehiculosActionPerformed
+
     public static void main(String args[]) {
-       
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -274,6 +289,7 @@ private TicketDAO ticketDAO;
     private javax.swing.JMenu menuItemSalida;
     private javax.swing.JMenuItem menuItemSalirI;
     private javax.swing.JMenuItem menuItemValidarTicket;
+    private javax.swing.JMenuItem menuItemVehiculos;
     private javax.swing.JMenuItem registrarMenuItem;
     private javax.swing.JMenuItem registrarVehiculoItem;
     // End of variables declaration//GEN-END:variables

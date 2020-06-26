@@ -6,15 +6,17 @@
 package ec.edu.ups.vista;
 
 import ec.edu.ups.controlador.ControladorTicket;
+import ec.edu.ups.controlador.ControladorVehiculo;
 import ec.edu.ups.modelo.Ticket;
 import javax.swing.JOptionPane;
         
 public class VentanaImprimirTicket extends javax.swing.JInternalFrame {
-
-    ControladorTicket controladorTicket;
+    private ControladorVehiculo controladorVehiculo;
+    private ControladorTicket controladorTicket;
     public VentanaImprimirTicket() {
         initComponents();
-        controladorTicket=new ControladorTicket();
+       
+       
     }
 
     /**

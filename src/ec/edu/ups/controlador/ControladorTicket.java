@@ -2,22 +2,24 @@ package ec.edu.ups.controlador;
 
 import ec.edu.ups.modelo.Ticket;
 import ec.edu.ups.dao.TicketDAO;
+import ec.edu.ups.dao.VehiculoDAO;
 import java.util.List;
 
 public class ControladorTicket {
 
-    TicketDAO ticketDao;
-    
-    public ControladorTicket(){
-        ticketDao=new TicketDAO();
+    private TicketDAO ticketDAO;
+    private VehiculoDAO vehiculoDAO;
+    public ControladorTicket(VehiculoDAO vehiculoDAO,TicketDAO ticketDAO){
+         this.ticketDAO=ticketDAO;
+            this.vehiculoDAO = vehiculoDAO;
     }
     public void crearTicket(Ticket ticket){
-        ticketDao.create(ticket);
+        ticketDAO.create(ticket);
         
     }
 public Ticket buscarTicketPorCodigo(int codigo){
     
-    List<Ticket> ticket=ticketDao.findAll();
+    List<Ticket> ticket=ticketDAO.findAll();
     System.out.println(ticket.size());
     for (Ticket ticket1 : ticket) {
        
@@ -28,5 +30,6 @@ public Ticket buscarTicketPorCodigo(int codigo){
     }
     return null;
 }
+
     
 }

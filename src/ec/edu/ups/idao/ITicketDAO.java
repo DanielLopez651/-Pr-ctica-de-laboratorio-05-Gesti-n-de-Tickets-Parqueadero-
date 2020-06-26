@@ -12,5 +12,6 @@ public interface ITicketDAO {
 
     public void delete(Ticket ticket);
 
-    public List<Ticket> findAll();    
+    public List<Ticket> findAll();   
+    
 }

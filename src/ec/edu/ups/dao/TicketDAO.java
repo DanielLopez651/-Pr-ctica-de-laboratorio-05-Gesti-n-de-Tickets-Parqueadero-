@@ -11,13 +11,17 @@ import java.util.List;
 
 public class TicketDAO implements ITicketDAO{
 private List<Ticket> listaTickets;
-    
+    //
+
 public TicketDAO(){
     listaTickets=new ArrayList<>();
+   //
     
 }
     @Override
     public void create(Ticket ticket) {
+       //
+      
         listaTickets.add(ticket);
         
     }
@@ -41,5 +45,7 @@ public TicketDAO(){
     public List<Ticket> findAll() {
        return listaTickets;
     }
+    
+
     
 }

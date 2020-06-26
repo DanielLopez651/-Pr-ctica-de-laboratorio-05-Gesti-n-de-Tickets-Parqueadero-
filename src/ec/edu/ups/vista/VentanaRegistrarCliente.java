@@ -18,10 +18,9 @@ private TicketDAO ticketDAO;
 
     public VentanaRegistrarCliente(ControladorCliente controladorCliente,VentanaPrincipal ventanaPrincipal) {
         initComponents();
-        
+        this.ventanaPrincipal=ventanaPrincipal;
       this.controladorCliente = controladorCliente;
-     clienteDAO= new ClienteDAO();
-        vehiculoDAO=new VehiculoDAO();
+    
        
        
     }

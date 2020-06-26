@@ -27,16 +27,16 @@ public class ControladorVehiculo {
     //Objetos DAO
 
     private IVehichuloDAO vehichuloDAO;
-
+   
  
 
-    public ControladorVehiculo(IVehichuloDAO vehichuloDAO) {
+    public ControladorVehiculo(IVehichuloDAO vehichuloDAO,ControladorTicket controladorTicket) {
         this.vehichuloDAO = vehichuloDAO;
-        controladorTicket=new ControladorTicket();
+       this.controladorTicket=controladorTicket;
     }
     
     public void registrar(String placa,String marca,String modelo){
-        
+      
         
        Calendar calendario=new GregorianCalendar();
             int hora,minutos;
@@ -47,12 +47,13 @@ public class ControladorVehiculo {
             numeroVehiculos++;
             ticket = new  Ticket(hora,minutos,numeroVehiculos);
            
-            controladorTicket.crearTicket(ticket);
+         
             
         vehiculo=new Vehiculo(placa, marca, modelo,ticket);
         
         vehichuloDAO.create(vehiculo);
-        
+//         controladorTicket.crearTicket(ticket);
+System.out.println(vehiculo);
     }
         
 }
