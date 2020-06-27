@@ -18,6 +18,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private VentanaIniciarSesion ventanaIniciarSesion;
     private VentanaImprimirTicket ventanaimprimirTicket;
     private VentanaVehiculos ventanaVehiculos;
+    private VentanaIngresarVehiculo ingresarVehiculo;
 //controladores
     private ControladorCliente controladorCliente;
     private ControladorVehiculo controladorVehiculo;
@@ -43,8 +44,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ticketDAO = new TicketDAO();
         //instancia controloadores
         controladorCliente = new ControladorCliente(clienteDAO, vehiculoDAO);
-        controladorVehiculo = new ControladorVehiculo(vehiculoDAO, controladorTicket);
         controladorTicket = new ControladorTicket(vehiculoDAO, ticketDAO);
+        controladorVehiculo = new ControladorVehiculo(vehiculoDAO, controladorTicket);
+        
         //instancia las vistas
         ventanaRegistrarVehiculo = new VentanaRegistrarVehiculo(controladorVehiculo, this);
         ventanaIniciarSesion = new VentanaIniciarSesion(controladorCliente, this);
@@ -94,6 +96,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         iniciarMenuItem = new javax.swing.JMenuItem();
         menuItemVehiculos = new javax.swing.JMenuItem();
         MenuItemCerrarSesion = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         menuItemSalirI = new javax.swing.JMenuItem();
         menuItemSalida = new javax.swing.JMenu();
         menuItemValidarTicket = new javax.swing.JMenuItem();
@@ -150,6 +153,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         ingresoMenu.add(MenuItemCerrarSesion);
+
+        jMenuItem1.setText("Ingresar vehiculo");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        ingresoMenu.add(jMenuItem1);
 
         menuItemSalirI.setMnemonic('x');
         menuItemSalirI.setText("Salir");
@@ -249,6 +260,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventanaVehiculos.setVisible(true);
     }//GEN-LAST:event_menuItemVehiculosActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     public static void main(String args[]) {
 
         try {
@@ -284,6 +304,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenu ingresoMenu;
     private javax.swing.JMenuItem iniciarMenuItem;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuItemRegresarSalida;
     private javax.swing.JMenu menuItemSalida;

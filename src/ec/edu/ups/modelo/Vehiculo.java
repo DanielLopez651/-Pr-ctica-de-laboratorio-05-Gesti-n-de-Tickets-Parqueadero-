@@ -25,17 +25,22 @@ public class Vehiculo {
         tickete = new Ticket(0,0,0);
     }
 
-    public Vehiculo(String placa, String marca, String modelo, Ticket ticket) {
+    public Vehiculo(String placa, String marca, String modelo) {
         this.placa = placa;
         this.marca = marca;
         this.modelo = modelo;
-        this.tickete=ticket;
+        
         
     }
 
     public Ticket getTicketes() {
         return tickete;
     }
+
+    public void setTickete(Ticket tickete) {
+        this.tickete = tickete;
+    }
+    
     
 
     public String getPlaca() {

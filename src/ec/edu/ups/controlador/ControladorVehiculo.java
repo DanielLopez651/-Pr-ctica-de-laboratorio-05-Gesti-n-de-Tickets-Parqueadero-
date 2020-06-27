@@ -5,12 +5,14 @@
  */
 package ec.edu.ups.controlador;
 
+import com.sun.imageio.plugins.jpeg.JPEG;
 import ec.edu.ups.idao.IVehichuloDAO;
 import ec.edu.ups.modelo.Cliente;
 import ec.edu.ups.modelo.*;
 import ec.edu.ups.controlador.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  *
@@ -36,24 +38,26 @@ public class ControladorVehiculo {
     }
     
     public void registrar(String placa,String marca,String modelo){
-      
-        
-       Calendar calendario=new GregorianCalendar();
-            int hora,minutos;
+       
             
-            
-            hora=calendario.get(Calendar.HOUR_OF_DAY);
-            minutos = calendario.get(Calendar.MINUTE);
-            numeroVehiculos++;
-            ticket = new  Ticket(hora,minutos,numeroVehiculos);
-           
-         
-            
-        vehiculo=new Vehiculo(placa, marca, modelo,ticket);
+        vehiculo=new Vehiculo(placa, marca, modelo);
         
         vehichuloDAO.create(vehiculo);
-//         controladorTicket.crearTicket(ticket);
-System.out.println(vehiculo);
+
+    }
+    
+    public Vehiculo BuscarVehiculoPorPlaca (String placa){
+        
+        List <Vehiculo> listaVehiculo= vehichuloDAO.findAll();
+        
+        for (Vehiculo vehiculo1 : listaVehiculo) {
+            if ( vehiculo1.getPlaca().equalsIgnoreCase(placa)){
+                vehiculo1.setTickete(ticket);
+                vehichuloDAO.update(vehiculo1);
+                return vehiculo1;
+            }
+        }
+        return null;
     }
         
 }
