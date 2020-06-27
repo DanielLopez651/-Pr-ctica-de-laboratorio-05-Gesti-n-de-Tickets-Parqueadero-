@@ -6,58 +6,85 @@
 package ec.edu.ups.controlador;
 
 import com.sun.imageio.plugins.jpeg.JPEG;
-import ec.edu.ups.idao.IVehichuloDAO;
+
 import ec.edu.ups.modelo.Cliente;
 import ec.edu.ups.modelo.*;
 import ec.edu.ups.controlador.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import ec.edu.ups.idao.IVehiculoDAO;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author user
  */
 public class ControladorVehiculo {
-    //Objeto Telefono
 
     private Vehiculo vehiculo;
-    private Cliente cliente;
-    private int numeroVehiculos=0;
+    private IVehiculoDAO vehiculoDAO;
+    private ControladorCliente controladorCliente;
+
+    private int numeroVehiculos = 0;
     private Ticket ticket;
-    private ControladorTicket controladorTicket;
+
     //Objetos DAO
+    public ControladorVehiculo(IVehiculoDAO vehiculoDAO, ControladorCliente controladorCliente) {
+        this.vehiculoDAO = vehiculoDAO;
+        this.controladorCliente = controladorCliente;
+    }
 
-    private IVehichuloDAO vehichuloDAO;
-   
- 
+    public void registrar(String placa, String marca, String modelo,String cedula) {
 
-    public ControladorVehiculo(IVehichuloDAO vehichuloDAO,ControladorTicket controladorTicket) {
-        this.vehichuloDAO = vehichuloDAO;
-       this.controladorTicket=controladorTicket;
+       vehiculo = new Vehiculo(placa, marca, modelo, null);
+	vehiculo.setPropietario(controladorCliente.verCliente(cedula));
+        vehiculoDAO.create(vehiculo);
+    }
+     public void actualizar(String placa, String marca, String modelo,String cedula){
+	vehiculo = new Vehiculo(placa, marca, modelo,null);
+	vehiculo.setPropietario(controladorCliente.verCliente(cedula));
+        vehiculoDAO.update(vehiculo);
     }
     
-    public void registrar(String placa,String marca,String modelo){
-       
-            
-        vehiculo=new Vehiculo(placa, marca, modelo);
-        
-        vehichuloDAO.create(vehiculo);
-
+    public void eliminar(String placa, String marca, String modelo){
+        vehiculo = new Vehiculo(placa, marca, modelo,null);
+        vehiculoDAO.delete(vehiculo);
     }
-    
-    public Vehiculo BuscarVehiculoPorPlaca (String placa){
-        
-        List <Vehiculo> listaVehiculo= vehichuloDAO.findAll();
-        
+
+    public Vehiculo verVehiculo(String placa) {
+        vehiculo = vehiculoDAO.read(placa);
+        return vehiculo;
+    }
+
+    public List<Vehiculo> listar() {
+        return vehiculoDAO.findAll();
+    }
+
+    public void verVehiculos(DefaultTableModel tabla) {
+        List<Vehiculo> vehiculos;
+        vehiculos = vehiculoDAO.findAll();
+        tabla.setRowCount(0);
+        for (int i = 0; i < vehiculos.size(); i++) {
+            tabla.addRow(new Object[]{
+                vehiculos.get(i).getPlaca(),
+                vehiculos.get(i).getMarca(),
+                vehiculos.get(i).getModelo(),});
+        }
+    }
+
+    public Vehiculo BuscarVehiculoPorPlaca(String placa) {
+
+        List<Vehiculo> listaVehiculo = vehiculoDAO.findAll();
+
         for (Vehiculo vehiculo1 : listaVehiculo) {
-            if ( vehiculo1.getPlaca().equalsIgnoreCase(placa)){
+            if (vehiculo1.getPlaca().equalsIgnoreCase(placa)) {
                 vehiculo1.setTickete(ticket);
-                vehichuloDAO.update(vehiculo1);
+                vehiculoDAO.update(vehiculo1);
                 return vehiculo1;
             }
         }
         return null;
     }
-        
+
 }

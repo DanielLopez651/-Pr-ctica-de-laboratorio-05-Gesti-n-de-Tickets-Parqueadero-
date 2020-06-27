@@ -5,10 +5,12 @@ import ec.edu.ups.modelo.Cliente;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class ClienteDAO implements IClienteDAO {
 
-    private List<Cliente> listaClientes;
+     private List<Cliente> listaClientes;
 
     public ClienteDAO() {
         listaClientes = new ArrayList<>();
@@ -67,5 +69,5 @@ public class ClienteDAO implements IClienteDAO {
         }
         return null;
     }
-
 }
+

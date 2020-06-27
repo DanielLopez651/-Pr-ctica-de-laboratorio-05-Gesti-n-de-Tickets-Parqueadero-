@@ -7,12 +7,14 @@ import ec.edu.ups.controlador.ControladorVehiculo;
 import ec.edu.ups.dao.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.swing.JMenuItem;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
 
     Calendar calendario;
-
+    //ventanas
     private VentanaRegistrarCliente ventanaRegistrarCliente;
     private VentanaRegistrarVehiculo ventanaRegistrarVehiculo;
     private VentanaIniciarSesion ventanaIniciarSesion;
@@ -23,17 +25,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private ControladorCliente controladorCliente;
     private ControladorVehiculo controladorVehiculo;
     private ControladorTicket controladorTicket;
-
 //dao
     private ClienteDAO clienteDAO;
     private VehiculoDAO vehiculoDAO;
     private TicketDAO ticketDAO;
+    //internacionalizacion
+    private Locale localizacion;
+    private ResourceBundle mensajes;
 
     public VentanaPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
         //visibilidad
-
         registrarVehiculoItem.setVisible(false);
         MenuItemCerrarSesion.setVisible(false);
         menuItemVehiculos.setVisible(false);
@@ -43,16 +46,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         vehiculoDAO = new VehiculoDAO();
         ticketDAO = new TicketDAO();
         //instancia controloadores
-        controladorCliente = new ControladorCliente(clienteDAO, vehiculoDAO);
-        controladorTicket = new ControladorTicket(vehiculoDAO, ticketDAO);
-        controladorVehiculo = new ControladorVehiculo(vehiculoDAO, controladorTicket);
-        
+        controladorCliente = new ControladorCliente(clienteDAO);
+	controladorVehiculo = new ControladorVehiculo(vehiculoDAO, controladorCliente);
+	controladorTicket = new ControladorTicket(ticketDAO, controladorVehiculo);
+
         //instancia las vistas
-        ventanaRegistrarVehiculo = new VentanaRegistrarVehiculo(controladorVehiculo, this);
+        ventanaRegistrarVehiculo = new VentanaRegistrarVehiculo(controladorCliente, controladorVehiculo);
         ventanaIniciarSesion = new VentanaIniciarSesion(controladorCliente, this);
-        ventanaRegistrarCliente = new VentanaRegistrarCliente(controladorCliente, this);
+        ventanaRegistrarCliente = new VentanaRegistrarCliente(controladorCliente);
+        ventanaRegistrarVehiculo=new VentanaRegistrarVehiculo(controladorCliente, controladorVehiculo);
         ventanaimprimirTicket = new VentanaImprimirTicket();
         ventanaVehiculos = new VentanaVehiculos();
+        
 
         //añadir a destokpane
         desktopPane.add(ventanaRegistrarCliente);
@@ -60,6 +65,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         desktopPane.add(ventanaimprimirTicket);
         desktopPane.add(ventanaRegistrarVehiculo);
         desktopPane.add(ventanaVehiculos);
+        
+	ventanaRegistrarCliente.setVentanaPrincipal(this);
+	
+	
+	ventanaRegistrarVehiculo.setVentanaPrincipal(this);
         calendario = new GregorianCalendar();
 
     }
@@ -84,6 +94,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         return menuItemVehiculos;
     }
 
+    public VentanaRegistrarVehiculo getVentanaRegistrarVehiculo() {
+        return ventanaRegistrarVehiculo;
+    }
+    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -96,7 +111,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         iniciarMenuItem = new javax.swing.JMenuItem();
         menuItemVehiculos = new javax.swing.JMenuItem();
         MenuItemCerrarSesion = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
         menuItemSalirI = new javax.swing.JMenuItem();
         menuItemSalida = new javax.swing.JMenu();
         menuItemValidarTicket = new javax.swing.JMenuItem();
@@ -153,14 +167,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         ingresoMenu.add(MenuItemCerrarSesion);
-
-        jMenuItem1.setText("Ingresar vehiculo");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        ingresoMenu.add(jMenuItem1);
 
         menuItemSalirI.setMnemonic('x');
         menuItemSalirI.setText("Salir");
@@ -240,7 +246,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void MenuItemCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemCerrarSesionActionPerformed
         MenuItemCerrarSesion.setVisible(false);
-        registrarVehiculoItem.setVisible(false);
+        registrarVehiculoItem.setVisible(true);
         iniciarMenuItem.setVisible(true);
         registrarMenuItem.setVisible(true);
         menuItemVehiculos.setVisible(false);
@@ -259,15 +265,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void menuItemVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVehiculosActionPerformed
         ventanaVehiculos.setVisible(true);
     }//GEN-LAST:event_menuItemVehiculosActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        
-        
-        
-        
-        
-        
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     public static void main(String args[]) {
 
@@ -304,7 +301,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenu ingresoMenu;
     private javax.swing.JMenuItem iniciarMenuItem;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuItemRegresarSalida;
     private javax.swing.JMenu menuItemSalida;

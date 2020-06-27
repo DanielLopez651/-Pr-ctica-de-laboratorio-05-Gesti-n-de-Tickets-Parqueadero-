@@ -20,26 +20,34 @@ public class Vehiculo {
     private String marca;
     private String modelo;
     private Ticket tickete;
-
+    private Cliente propietario;
     public Vehiculo() {
-        tickete = new Ticket(0,0,0);
-    }
-
-    public Vehiculo(String placa, String marca, String modelo) {
-        this.placa = placa;
-        this.marca = marca;
-        this.modelo = modelo;
-        
         
     }
 
-    public Ticket getTicketes() {
+    public Vehiculo(String placa, String marca, String modelo,Cliente propietario) {
+	this.placa = placa;
+	this.marca = marca;
+	this.modelo = modelo;
+	this.propietario = propietario;
+    }
+    
+    public Cliente getPropietario() {
+	return propietario;
+    }
+
+    public void setPropietario(Cliente propietario) {
+	this.propietario = propietario;
+    }
+
+    public Ticket getTickete() {
         return tickete;
     }
 
     public void setTickete(Ticket tickete) {
         this.tickete = tickete;
     }
+  
     
     
 

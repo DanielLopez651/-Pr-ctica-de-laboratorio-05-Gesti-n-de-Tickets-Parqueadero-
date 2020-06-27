@@ -72,13 +72,13 @@ public class VentanaImprimirTicket extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        Ticket ticket=controladorTicket.buscarTicketPorCodigo(Integer.parseInt(jTextField1.getText()));
-        
-        if(ticket!=null){
-            JOptionPane.showMessageDialog(this,"Ticket encontrado");
-        }else{
-            JOptionPane.showMessageDialog(this, "Ticket no encontrado");
-        }
+//        Ticket ticket=controladorTicket.buscarTicketPorCodigo(Integer.parseInt(jTextField1.getText()));
+//        
+//        if(ticket!=null){
+//            JOptionPane.showMessageDialog(this,"Ticket encontrado");
+//        }else{
+//            JOptionPane.showMessageDialog(this, "Ticket no encontrado");
+//        }
         
         
     }//GEN-LAST:event_jToggleButton1ActionPerformed

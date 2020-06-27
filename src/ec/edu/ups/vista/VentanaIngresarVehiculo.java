@@ -19,10 +19,7 @@ public class VentanaIngresarVehiculo extends javax.swing.JInternalFrame {
     public VentanaIngresarVehiculo() {
         initComponents();
         this.setTitle("Ingreso vehiculo");
-        vehiculoDAO = new VehiculoDAO();
-        ticketDAO = new TicketDAO();
-        controladorTicket = new ControladorTicket(vehiculoDAO, ticketDAO);
-        controladorVehiculo = new ControladorVehiculo(vehiculoDAO, controladorTicket);
+      
     }
 
 

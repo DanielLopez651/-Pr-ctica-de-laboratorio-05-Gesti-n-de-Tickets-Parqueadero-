@@ -5,23 +5,34 @@
  */
 package ec.edu.ups.vista;
 
+import ec.edu.ups.controlador.ControladorCliente;
 import ec.edu.ups.controlador.ControladorVehiculo;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import ec.edu.ups.controlador.ControladorTicket;
 import ec.edu.ups.vista.*;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
 
-    private ControladorTicket controladorTicket;
     private ControladorVehiculo controladorVehiculo;
+private ControladorCliente controladorCliente;
 
-    public VentanaRegistrarVehiculo(ControladorVehiculo controladorVehiculo, VentanaPrincipal ventanaPrincipal) {
+ private VentanaPrincipal ventanaPrincipal;
+ private VentanaRegistrarCliente ventanaRegistrarCliente;
+    public VentanaRegistrarVehiculo(ControladorCliente controladorCliente,ControladorVehiculo controladorVehiculo) {
         initComponents();
-
+        this.controladorCliente=controladorCliente;
         this.controladorVehiculo = controladorVehiculo;
+        controladorCliente.verClientes((DefaultTableModel)tablaClientes.getModel());
+        btnRegistrar.setEnabled(false);
     }
+
+    public void setVentanaPrincipal(VentanaPrincipal ventanaPrincipal) {
+        this.ventanaPrincipal = ventanaPrincipal;
+    }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -34,9 +45,15 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
         txtPlaca = new javax.swing.JTextField();
         txtMarca = new javax.swing.JTextField();
         txtModelo = new javax.swing.JTextField();
-        btnRegistrarVehiculo = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
-        txtTicket = new javax.swing.JTextField();
+        btnCliente = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaClientes = new javax.swing.JTable() {
+            public boolean editCellAt(int row, int column, java.util.EventObject e){
+                return false;
+            }
+        };
 
         setClosable(true);
         setIconifiable(true);
@@ -48,6 +65,7 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
                 formInternalFrameActivated(evt);
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
             }
             public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -75,11 +93,11 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
 
         txtModelo.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        btnRegistrarVehiculo.setBackground(new java.awt.Color(153, 255, 153));
-        btnRegistrarVehiculo.setText("Registar Vehiculo");
-        btnRegistrarVehiculo.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistrar.setBackground(new java.awt.Color(153, 255, 153));
+        btnRegistrar.setText("Registar Vehiculo");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarVehiculoActionPerformed(evt);
+                btnRegistrarActionPerformed(evt);
             }
         });
 
@@ -91,33 +109,38 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
             }
         });
 
-        txtTicket.setEditable(false);
-        txtTicket.setText("0");
+        btnCliente.setText("RegistarCliente");
+        btnCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(115, Short.MAX_VALUE)
-                .addComponent(btnVolver)
-                .addGap(18, 18, 18)
-                .addComponent(btnRegistrarVehiculo)
-                .addGap(30, 30, 30))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtPlaca, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                        .addComponent(txtMarca)
-                        .addComponent(txtModelo))
-                    .addComponent(txtTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtPlaca, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                            .addComponent(txtMarca)
+                            .addComponent(txtModelo)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnCliente)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnVolver)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRegistrar)))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,14 +157,36 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(txtTicket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegistrarVehiculo)
-                    .addComponent(btnVolver))
-                .addGap(44, 44, 44))
+                    .addComponent(btnCliente)
+                    .addComponent(btnVolver)
+                    .addComponent(btnRegistrar))
+                .addGap(15, 15, 15))
         );
+
+        tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Cédula", "Nombre", "Dirección", "Teléfono"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tablaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaClientesMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablaClientes);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,34 +195,49 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                .addGap(6, 6, 6))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegistrarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarVehiculoActionPerformed
-        String placa = txtPlaca.getText();
-        String marca = txtMarca.getText();
-        String modelo = txtModelo.getText();
-        if (placa.isEmpty() || marca.isEmpty() || modelo.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "¡Llene todos los campos solicitados!");
-        } else {
-            controladorVehiculo.registrar(placa, marca, modelo);
-            JOptionPane.showMessageDialog(this, "Vehiculo creado");
-            limpiar();
-            this.setVisible(false);
-        }
-
-
-    }//GEN-LAST:event_btnRegistrarVehiculoActionPerformed
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+                                                  
+//       String placa = txtPlaca.getText();
+//        String marca = txtMarca.getText();
+//        String modelo = txtModelo.getText();
+//        String cedula=txtCedula.getText();
+//        if (placa.isEmpty() || marca.isEmpty() || modelo.isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "¡Llene todos los campos solicitados!");
+//        } else {
+//            
+//            controladorVehiculo.registrar(placa, marca, modelo,cedula);
+//            JOptionPane.showMessageDialog(this, "Vehiculo creado");
+//            limpiar();
+//            this.setVisible(false);
+//        }
+   String placa = txtPlaca.getText();
+	String modelo = txtModelo.getText();
+	String marca = txtMarca.getText();
+	String cedula = (String)tablaClientes.getValueAt(tablaClientes.getSelectedRow(), 0);
+	controladorVehiculo.registrar(placa, marca, modelo, cedula);
+	JOptionPane.showMessageDialog(this, "Vehiculo Registrado", "Registro", JOptionPane.INFORMATION_MESSAGE);
+	limpiar();
+        ventanaPrincipal.getVentanaRegistrarVehiculo().actualizar();
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
 
@@ -186,24 +246,47 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void tablaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaClientesMouseClicked
+        if(evt.getClickCount() == 1 && !evt.isConsumed()){
+            evt.consume();
+            btnRegistrar.setEnabled(true);
+        }
+    }//GEN-LAST:event_tablaClientesMouseClicked
+
+    private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
+        hide();
+        ventanaRegistrarCliente.setVisible(true);
+    }//GEN-LAST:event_btnClienteActionPerformed
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+      limpiar();
+	ventanaPrincipal.getVentanaRegistrarVehiculo().actualizar();
+	ventanaPrincipal.getVentanaRegistrarVehiculo().show();
+    }//GEN-LAST:event_formInternalFrameClosed
     public void limpiar() {
         txtMarca.setText("");
         txtModelo.setText("");
         txtPlaca.setText("");
 
     }
+    public void actualizar(){
+        controladorCliente.verClientes((DefaultTableModel)tablaClientes.getModel());
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRegistrarVehiculo;
+    private javax.swing.JButton btnCliente;
+    private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tablaClientes;
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtModelo;
     private javax.swing.JTextField txtPlaca;
-    private javax.swing.JTextField txtTicket;
     // End of variables declaration//GEN-END:variables
 }

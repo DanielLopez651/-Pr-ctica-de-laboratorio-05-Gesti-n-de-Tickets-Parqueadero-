@@ -5,18 +5,18 @@
  */
 package ec.edu.ups.dao;
 
-import ec.edu.ups.idao.IVehichuloDAO;
 import ec.edu.ups.modelo.Vehiculo;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import java.util.List;
+import ec.edu.ups.idao.IVehiculoDAO;
 
 /**
  *
  * @author user
  */
-public class VehiculoDAO implements IVehichuloDAO {
+public class VehiculoDAO implements IVehiculoDAO {
 
     private List<Vehiculo> listaVehiculos;
 

@@ -32,6 +32,10 @@ public class Cliente {
         vehiculos = new ArrayList<>();
     }
 
+    public void setVehiculos(List<Vehiculo> vehiculos) {
+        this.vehiculos = vehiculos;
+    }
+    
     public List<Vehiculo> getVehiculos() {
         return vehiculos;
     }

@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author user
  */
-public interface IVehichuloDAO {
+public interface IVehiculoDAO {
       public void create(Vehiculo vehiculo);
 
     public Vehiculo read(String placa);
