@@ -41,6 +41,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         MenuItemCerrarSesion.setVisible(false);
         menuItemVehiculos.setVisible(false);
         System.out.println("helllloooo");
+        System.out.println("no hay error");
         //instancia DAOS
         clienteDAO = new ClienteDAO();
         vehiculoDAO = new VehiculoDAO();
