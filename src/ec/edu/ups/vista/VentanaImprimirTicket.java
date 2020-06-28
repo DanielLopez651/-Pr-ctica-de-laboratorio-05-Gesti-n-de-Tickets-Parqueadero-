@@ -113,9 +113,11 @@ public class VentanaImprimirTicket extends javax.swing.JInternalFrame {
         actualizar();
         if(ticket!=null){
             double total=controladorTicket.precio(ticket);
-            JOptionPane.showMessageDialog(this,"Valr a pagar "+total);
+            JOptionPane.showMessageDialog(this,"Valor a pagar: "+total);
+            double fracciones=total/0.25;
+            JOptionPane.showMessageDialog(this,"Las fracciones fueron: "+total);
             jTextField1.setText("");
-            dispose();
+            
             
         }else{
             JOptionPane.showMessageDialog(this, "Ticket no encontrado");
