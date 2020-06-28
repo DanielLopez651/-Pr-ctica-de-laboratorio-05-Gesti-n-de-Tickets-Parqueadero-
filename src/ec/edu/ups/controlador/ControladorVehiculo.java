@@ -14,6 +14,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import ec.edu.ups.idao.IVehiculoDAO;
+import java.time.LocalDateTime;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,14 +26,18 @@ public class ControladorVehiculo {
     private Vehiculo vehiculo;
     private IVehiculoDAO vehiculoDAO;
     private ControladorCliente controladorCliente;
+    private ControladorTicket controladorTicket;
 
     private int numeroVehiculos = 0;
     private Ticket ticket;
 
     //Objetos DAO
-    public ControladorVehiculo(IVehiculoDAO vehiculoDAO, ControladorCliente controladorCliente) {
+    public ControladorVehiculo(IVehiculoDAO vehiculoDAO, ControladorCliente controladorCliente, ControladorTicket controladorTicket) {
+        this.controladorTicket=controladorTicket;
         this.vehiculoDAO = vehiculoDAO;
         this.controladorCliente = controladorCliente;
+        
+        
     }
 
     public void registrar(String placa, String marca, String modelo,String cedula) {
@@ -69,22 +74,35 @@ public class ControladorVehiculo {
             tabla.addRow(new Object[]{
                 vehiculos.get(i).getPlaca(),
                 vehiculos.get(i).getMarca(),
-                vehiculos.get(i).getModelo(),});
+                vehiculos.get(i).getModelo(),
+                vehiculos.get(i).getTickete().getNumeroT()
+            });
         }
     }
 
-    public Vehiculo BuscarVehiculoPorPlaca(String placa) {
-
-        List<Vehiculo> listaVehiculo = vehiculoDAO.findAll();
-
+      public Vehiculo BuscarVehiculoPorPlaca (String placa){
+       
+        List <Vehiculo> listaVehiculo= vehiculoDAO.findAll();
+         
         for (Vehiculo vehiculo1 : listaVehiculo) {
-            if (vehiculo1.getPlaca().equalsIgnoreCase(placa)) {
+            if ( vehiculo1.getPlaca().equalsIgnoreCase(placa)){
+                numeroVehiculos++;
+                ticket= new Ticket(numeroVehiculos);
+         
+                LocalDateTime tiempo = LocalDateTime.now();
+                ticket.setFechaIngreso(tiempo);
+           
+               
+                
+                controladorTicket.crearTicket(ticket);
+               
+                
                 vehiculo1.setTickete(ticket);
+                System.out.println(ticket);
                 vehiculoDAO.update(vehiculo1);
                 return vehiculo1;
             }
         }
         return null;
     }
-
 }

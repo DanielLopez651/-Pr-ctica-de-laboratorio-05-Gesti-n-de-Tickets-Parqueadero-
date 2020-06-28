@@ -4,11 +4,9 @@
  * and open the template in the editor.
  */
 package ec.edu.ups.modelo;
-
 import java.time.LocalDateTime;
-
-
-
+import java.util.Calendar;
+import java.util.Date;
 
 
 /**
@@ -17,36 +15,54 @@ import java.time.LocalDateTime;
  */
 public class Ticket {
     private int numeroT;
-    private int horadeEntrada;
-    private int minutodeEntrada;
-    public Ticket(int numeroT, int horadeEntrada, int minutodeEntrada) {
+    private LocalDateTime FechaIngreso;
+    private LocalDateTime FechaSalida;
+    private Vehiculo vehiculo;
+
+    public Ticket(int numeroT) {
         this.numeroT = numeroT;
-        this.horadeEntrada = horadeEntrada;
-        this.minutodeEntrada = minutodeEntrada;
+        
     }
-    public int getHoradeEntrada() {
-        return horadeEntrada;
+    
+    
+    
+    public LocalDateTime getFechaIngreso() {
+        return FechaIngreso;
     }
-    public void setHoradeEntrada(int horadeEntrada) {
-        this.horadeEntrada = horadeEntrada;
+
+    public void setFechaIngreso(LocalDateTime FechaIngreso) {
+        this.FechaIngreso = FechaIngreso;
     }
-    public int getMinutodeEntrada() {
-        return minutodeEntrada;
+
+    public LocalDateTime getFechaSalida() {
+        return FechaSalida;
     }
-    public void setMinutodeEntrada(int minutodeEntrada) {
-        this.minutodeEntrada = minutodeEntrada;
+
+    public void setFechaSalida(LocalDateTime FechaSalida) {
+        this.FechaSalida = FechaSalida;
     }
+
+    
+    
+ 
+
+    
+    
     public int getNumeroT() {
         return numeroT;
     }
+
     public void setNumeroT(int numeroT) {
         this.numeroT = numeroT;
     }
+
     @Override
     public String toString() {
         return "Ticket{" + "numeroT=" + numeroT + '}';
     }
 
+ 
 
     
 }
+

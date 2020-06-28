@@ -19,6 +19,7 @@ public class ControladorTicket {
 	this.controladorVehiculo = controladorVehiculo;   
     }
     public void crearTicket(Ticket ticket){
+      
         ticketDAO.create(ticket); 
     }
 public Ticket buscarTicketPorCodigo(int codigo){
@@ -31,6 +32,17 @@ public Ticket buscarTicketPorCodigo(int codigo){
     }
     return null;
 }
+public double precio(Ticket ticket){
+    
+    LocalDateTime tiempo = LocalDateTime.now();
+    
+    Duration diff= Duration.between(ticket.getFechaIngreso(), tiempo);
+    long diffmin=diff.toMinutes();
+    diffmin /= 10;
+    double total=0.25 * diffmin;
+    return total;
+}
+
 //private ITicketDAO ticketDAO;
 //    private ControladorVehiculo controladorVehiculo;
 //    private Ticket ticket;

@@ -16,10 +16,10 @@ public class VentanaIngresarVehiculo extends javax.swing.JInternalFrame {
     
      private ControladorTicket controladorTicket;
      
-    public VentanaIngresarVehiculo() {
+    public VentanaIngresarVehiculo(ControladorVehiculo controladorVehiculo, VentanaPrincipal ventanaPrincipal) {
         initComponents();
         this.setTitle("Ingreso vehiculo");
-      
+      this.controladorVehiculo=controladorVehiculo;
     }
 
 
@@ -73,7 +73,10 @@ public class VentanaIngresarVehiculo extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String placa=jTextField1.getText();
+       String placa=jTextField1.getText();
+       
+     
+        
         
         Vehiculo v= controladorVehiculo.BuscarVehiculoPorPlaca(placa);
         if(v==null){
@@ -81,9 +84,13 @@ public class VentanaIngresarVehiculo extends javax.swing.JInternalFrame {
             jTextField1.setText("");
         }else{
             jTextField1.setText("");
-            JOptionPane.showMessageDialog(this, "Vehiculo registrado");
+            
+            JOptionPane.showMessageDialog(this, "Vehiculo registrado el codigo de su ticket es:"+v.getTickete().getNumeroT());
         }
         
+        jTextField1.setText("");
+       
+        dispose();
         
         
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -20,7 +20,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private VentanaIniciarSesion ventanaIniciarSesion;
     private VentanaImprimirTicket ventanaimprimirTicket;
     private VentanaVehiculos ventanaVehiculos;
-    private VentanaIngresarVehiculo ingresarVehiculo;
+    private VentanaIngresarVehiculo ventanaIngresarVehiculo;
 //controladores
     private ControladorCliente controladorCliente;
     private ControladorVehiculo controladorVehiculo;
@@ -40,32 +40,35 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 //        registrarVehiculoItem.setVisible(false);
 //        MenuItemCerrarSesion.setVisible(false);
 //        menuItemVehiculos.setVisible(false);
-        System.out.println("helllloooo");
-        System.out.println("no hay error");
+       
+        
         //instancia DAOS
         clienteDAO = new ClienteDAO();
         vehiculoDAO = new VehiculoDAO();
         ticketDAO = new TicketDAO();
         //instancia controloadores
         controladorCliente = new ControladorCliente(clienteDAO);
-	controladorVehiculo = new ControladorVehiculo(vehiculoDAO, controladorCliente);
-	controladorTicket = new ControladorTicket(ticketDAO, controladorVehiculo);
+        controladorTicket = new ControladorTicket(ticketDAO, controladorVehiculo);
+	controladorVehiculo = new ControladorVehiculo(vehiculoDAO, controladorCliente, controladorTicket);
+	
 
         //instancia las vistas
         ventanaRegistrarVehiculo = new VentanaRegistrarVehiculo(controladorCliente, controladorVehiculo);
         ventanaIniciarSesion = new VentanaIniciarSesion(controladorCliente, this);
         ventanaRegistrarCliente = new VentanaRegistrarCliente(controladorCliente);
         ventanaRegistrarVehiculo=new VentanaRegistrarVehiculo(controladorCliente, controladorVehiculo);
-        ventanaimprimirTicket = new VentanaImprimirTicket();
+        ventanaimprimirTicket = new VentanaImprimirTicket(controladorTicket, this);
         ventanaVehiculos = new VentanaVehiculos();
+        ventanaIngresarVehiculo=new VentanaIngresarVehiculo(controladorVehiculo, this);
         
 
         //añadir a destokpane
-        desktopPane.add(ventanaRegistrarCliente);
+       
         desktopPane.add(ventanaIniciarSesion);
-        desktopPane.add(ventanaimprimirTicket);
-        desktopPane.add(ventanaRegistrarVehiculo);
-        desktopPane.add(ventanaVehiculos);
+        
+        
+       
+        
         
 	ventanaRegistrarCliente.setVentanaPrincipal(this);
 	
@@ -87,9 +90,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         return registrarVehiculoItem;
     }
 
-    public JMenuItem getMenuItemVehiculos() {
-        return menuItemVehiculos;
-    }
+//    public JMenuItem getMenuItemVehiculos() {
+//        return menuItemVehiculos;
+//    }
 
     public VentanaRegistrarVehiculo getVentanaRegistrarVehiculo() {
         return ventanaRegistrarVehiculo;
@@ -105,7 +108,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ingresoMenu = new javax.swing.JMenu();
         registrarMenuItem = new javax.swing.JMenuItem();
         registrarVehiculoItem = new javax.swing.JMenuItem();
-        menuItemVehiculos = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         menuItemSalirI = new javax.swing.JMenuItem();
         menuItemSalida = new javax.swing.JMenu();
         menuItemValidarTicket = new javax.swing.JMenuItem();
@@ -139,13 +142,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         ingresoMenu.add(registrarVehiculoItem);
 
-        menuItemVehiculos.setText("Sus Vehiculos");
-        menuItemVehiculos.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem1.setText("Ingresar Vehiculo");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuItemVehiculosActionPerformed(evt);
+                jMenuItem1ActionPerformed(evt);
             }
         });
-        ingresoMenu.add(menuItemVehiculos);
+        ingresoMenu.add(jMenuItem1);
 
         menuItemSalirI.setMnemonic('x');
         menuItemSalirI.setText("Salir");
@@ -213,24 +216,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemRegresarSalidaActionPerformed
 
     private void registrarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarMenuItemActionPerformed
-
+ desktopPane.add(ventanaRegistrarCliente);
         ventanaRegistrarCliente.setVisible(true);
 
     }//GEN-LAST:event_registrarMenuItemActionPerformed
 
     private void registrarVehiculoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarVehiculoItemActionPerformed
+        desktopPane.add(ventanaRegistrarVehiculo);
         ventanaRegistrarVehiculo.setVisible(true);
 
     }//GEN-LAST:event_registrarVehiculoItemActionPerformed
 
     private void menuItemValidarTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemValidarTicketActionPerformed
-
+desktopPane.add(ventanaimprimirTicket);
         ventanaimprimirTicket.setVisible(true);
     }//GEN-LAST:event_menuItemValidarTicketActionPerformed
 
-    private void menuItemVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVehiculosActionPerformed
-        ventanaVehiculos.setVisible(true);
-    }//GEN-LAST:event_menuItemVehiculosActionPerformed
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        desktopPane.add(ventanaIngresarVehiculo);
+        ventanaIngresarVehiculo.setVisible(true);
+        
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     public static void main(String args[]) {
 
@@ -265,12 +272,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenu ingresoMenu;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuItemRegresarSalida;
     private javax.swing.JMenu menuItemSalida;
     private javax.swing.JMenuItem menuItemSalirI;
     private javax.swing.JMenuItem menuItemValidarTicket;
-    private javax.swing.JMenuItem menuItemVehiculos;
     private javax.swing.JMenuItem registrarMenuItem;
     private javax.swing.JMenuItem registrarVehiculoItem;
     // End of variables declaration//GEN-END:variables

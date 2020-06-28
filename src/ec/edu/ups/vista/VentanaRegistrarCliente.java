@@ -182,6 +182,7 @@ public class VentanaRegistrarCliente extends javax.swing.JInternalFrame {
 	controladorCliente.registrar(cedula, nombre, direccion, telefono);
 	JOptionPane.showMessageDialog(this, "Cliente Registrado", "Registro", JOptionPane.INFORMATION_MESSAGE);
 	limpiar();
+        dispose();
         ventanaPrincipal.getVentanaRegistrarVehiculo().actualizar();
     }//GEN-LAST:event_btnRegistarClienteActionPerformed
 
