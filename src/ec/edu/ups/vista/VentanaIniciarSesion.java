@@ -120,11 +120,11 @@ public class VentanaIniciarSesion extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "ingrese los campos porfavor");
         } else {
             if (controladorCliente.validarCliente(txtCedula.getText())) {
-                ventanaPrincipal.getMenuItemCerrarSesion().setVisible(true);
+               
                 ventanaPrincipal.getRegistrarMenuItem().setVisible(false);
                 ventanaPrincipal.getRegistrarVehiculoItem().setVisible(true);
                 ventanaPrincipal.getRegistrarMenuItem().setVisible(false);
-                ventanaPrincipal.getIniciarMenuItem().setVisible(false);
+               
                 limpiar();
                 this.setVisible(false);
                 

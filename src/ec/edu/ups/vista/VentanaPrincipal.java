@@ -37,9 +37,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         //visibilidad
-        registrarVehiculoItem.setVisible(false);
-        MenuItemCerrarSesion.setVisible(false);
-        menuItemVehiculos.setVisible(false);
+//        registrarVehiculoItem.setVisible(false);
+//        MenuItemCerrarSesion.setVisible(false);
+//        menuItemVehiculos.setVisible(false);
         System.out.println("helllloooo");
         System.out.println("no hay error");
         //instancia DAOS
@@ -75,13 +75,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     }
 
-    public JMenuItem getMenuItemCerrarSesion() {
-        return MenuItemCerrarSesion;
-    }
+   
 
-    public JMenuItem getIniciarMenuItem() {
-        return iniciarMenuItem;
-    }
+   
 
     public JMenuItem getRegistrarMenuItem() {
         return registrarMenuItem;
@@ -109,9 +105,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ingresoMenu = new javax.swing.JMenu();
         registrarMenuItem = new javax.swing.JMenuItem();
         registrarVehiculoItem = new javax.swing.JMenuItem();
-        iniciarMenuItem = new javax.swing.JMenuItem();
         menuItemVehiculos = new javax.swing.JMenuItem();
-        MenuItemCerrarSesion = new javax.swing.JMenuItem();
         menuItemSalirI = new javax.swing.JMenuItem();
         menuItemSalida = new javax.swing.JMenu();
         menuItemValidarTicket = new javax.swing.JMenuItem();
@@ -145,14 +139,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         ingresoMenu.add(registrarVehiculoItem);
 
-        iniciarMenuItem.setText("Usuario Recurrente");
-        iniciarMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                iniciarMenuItemActionPerformed(evt);
-            }
-        });
-        ingresoMenu.add(iniciarMenuItem);
-
         menuItemVehiculos.setText("Sus Vehiculos");
         menuItemVehiculos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,14 +146,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         ingresoMenu.add(menuItemVehiculos);
-
-        MenuItemCerrarSesion.setText("Cerrar Usuario Recurrente");
-        MenuItemCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuItemCerrarSesionActionPerformed(evt);
-            }
-        });
-        ingresoMenu.add(MenuItemCerrarSesion);
 
         menuItemSalirI.setMnemonic('x');
         menuItemSalirI.setText("Salir");
@@ -240,19 +218,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_registrarMenuItemActionPerformed
 
-    private void iniciarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarMenuItemActionPerformed
-        ventanaIniciarSesion.setVisible(true);
-        menuItemVehiculos.setVisible(true);
-    }//GEN-LAST:event_iniciarMenuItemActionPerformed
-
-    private void MenuItemCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemCerrarSesionActionPerformed
-        MenuItemCerrarSesion.setVisible(false);
-        registrarVehiculoItem.setVisible(true);
-        iniciarMenuItem.setVisible(true);
-        registrarMenuItem.setVisible(true);
-        menuItemVehiculos.setVisible(false);
-    }//GEN-LAST:event_MenuItemCerrarSesionActionPerformed
-
     private void registrarVehiculoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarVehiculoItemActionPerformed
         ventanaRegistrarVehiculo.setVisible(true);
 
@@ -296,12 +261,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem MenuItemCerrarSesion;
     private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenu ingresoMenu;
-    private javax.swing.JMenuItem iniciarMenuItem;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuItemRegresarSalida;
     private javax.swing.JMenu menuItemSalida;

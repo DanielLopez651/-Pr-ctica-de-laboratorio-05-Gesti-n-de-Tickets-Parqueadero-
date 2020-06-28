@@ -14,16 +14,16 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VentanaListarTickets extends javax.swing.JInternalFrame {
 
-     private ControladorTicket controladorTicket;
-    public VentanaListarTickets(ControladorTicket controladorTicket) {
-        initComponents();
-        this.controladorTicket = controladorTicket;
-	this.controladorTicket.listarTickets((DefaultTableModel) jTable1.getModel());
-    }
-    
-    public void actualizar(){
-	this.controladorTicket.listarTickets((DefaultTableModel) jTable1.getModel());
-    }
+//     private ControladorTicket controladorTicket;
+//    public VentanaListarTickets(ControladorTicket controladorTicket) {
+//        initComponents();
+//        this.controladorTicket = controladorTicket;
+//	this.controladorTicket.listarTickets((DefaultTableModel) jTable1.getModel());
+//    }
+//    
+//    public void actualizar(){
+//	this.controladorTicket.listarTickets((DefaultTableModel) jTable1.getModel());
+//    }
     
 
   
