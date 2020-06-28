@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 import javax.swing.JMenuItem;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
-
+    
     Calendar calendario;
     //ventanas
     private VentanaRegistrarCliente ventanaRegistrarCliente;
@@ -40,7 +40,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         registrarVehiculoItem.setVisible(false);
         MenuItemCerrarSesion.setVisible(false);
         menuItemVehiculos.setVisible(false);
-
+        System.out.println("helllloooo");
         //instancia DAOS
         clienteDAO = new ClienteDAO();
         vehiculoDAO = new VehiculoDAO();
