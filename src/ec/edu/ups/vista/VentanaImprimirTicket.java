@@ -15,7 +15,7 @@ public class VentanaImprimirTicket extends javax.swing.JInternalFrame {
     private ControladorTicket controladorTicket;
     public VentanaImprimirTicket() {
         initComponents();
-       
+        System.out.println("a");
        
     }
 
