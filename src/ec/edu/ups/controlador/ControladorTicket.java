@@ -42,6 +42,19 @@ public double precio(Ticket ticket){
     double total=0.25 * diffmin;
     return total;
 }
+public void verTicketsVehiculo(DefaultTableModel tabla){
+    List<Ticket> tickets;
+        tickets = ticketDAO.findAll();
+        tabla.setRowCount(0);
+	for(int i = 0; i < tickets.size(); i++){
+	    tabla.addRow(new Object[]{
+		tickets.get(i).getNumeroT(),
+                tickets.get(i).getFechaIngreso(),
+	    });
+	}
+     
+   
+}
 
 //private ITicketDAO ticketDAO;
 //    private ControladorVehiculo controladorVehiculo;
