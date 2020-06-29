@@ -39,6 +39,11 @@ public class VentanaIngresarVehiculo extends javax.swing.JInternalFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+
         jLabel1.setText("Ingrese la placa de su vehiculo");
 
         jButton1.setText("Ingresar");
