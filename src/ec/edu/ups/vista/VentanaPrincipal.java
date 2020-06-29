@@ -70,10 +70,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
         
         localizacion = Locale.getDefault();
-        System.out.println(localizacion.getCountry());
-	System.out.println(localizacion.getLanguage());
         mensajes = ResourceBundle.getBundle("ec.edu.ups.idiomas.mensajes",localizacion);
-       //cambiarIdioma();
+       cambiarIdioma();
     }
     public void cambiarIdioma(){
         ingresoMenu.setText(mensajes.getString("menuIngreso"));
@@ -86,7 +84,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuItemRegresarSalida.setText(mensajes.getString("menuItemRegresarSalida"));
         menuItemEpañol.setText(mensajes.getString("menuItemEpañol"));
         menuItemIngles .setText(mensajes.getString("menuItemIngles")); 
-        System.out.println("asd");
+        
+        ventanaRegistrarCliente.cambiarIdioma(localizacion, mensajes);
+        ventanaRegistrarVehiculo.cambiarIdioma(localizacion, mensajes);
+       
 //        
     }
    

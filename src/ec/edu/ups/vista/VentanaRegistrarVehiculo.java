@@ -11,6 +11,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import ec.edu.ups.controlador.ControladorTicket;
 import ec.edu.ups.vista.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -32,7 +34,16 @@ private ControladorCliente controladorCliente;
     public void setVentanaPrincipal(VentanaPrincipal ventanaPrincipal) {
         this.ventanaPrincipal = ventanaPrincipal;
     }
-    
+    public void cambiarIdioma(Locale localizacion, ResourceBundle mensajes){
+        jLabel1.setText(mensajes.getString("menuItemPlaca"));
+        jLabel2.setText(mensajes.getString("menuItemMarca"));
+        jLabel3.setText(mensajes.getString("menuItemModelo"));
+        
+        btnCliente.setText(mensajes.getString("botonRegistrarCliente"));
+        btnRegistrar.setText(mensajes.getString("botonRegistrarVehiculo"));
+        btnVolver.setText(mensajes.getString("botonVolver"));
+        
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

@@ -4,6 +4,8 @@ import javax.swing.JOptionPane;
 import ec.edu.ups.modelo.Cliente;
 import ec.edu.ups.controlador.ControladorCliente;
 import ec.edu.ups.dao.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 
 public class VentanaRegistrarCliente extends javax.swing.JInternalFrame {
@@ -11,14 +13,30 @@ public class VentanaRegistrarCliente extends javax.swing.JInternalFrame {
     private VentanaPrincipal ventanaPrincipal;
     private VentanaIniciarSesion ventanaIniciarSesion;
 
-
- 
+    private Locale localizacion;
+    private ResourceBundle mensajes;
+    
 
     public VentanaRegistrarCliente(ControladorCliente controladorCliente) {
         initComponents();
       this.controladorCliente = controladorCliente;
+      
+      
      
+        
+        
     }
+    
+     public void cambiarIdioma(Locale localizacion, ResourceBundle mensajes){
+         
+         jLabel1.setText(mensajes.getString("menuItemCedula"));
+         jLabel2.setText(mensajes.getString("menuItemDireccion"));
+         jLabel3.setText(mensajes.getString("menuItemNombre"));
+         jLabel4.setText(mensajes.getString("menuItemTelefono"));   
+         
+         btnCerrar.setText(mensajes.getString("botonCerrar"));
+         btnRegistarCliente.setText(mensajes.getString("botonRegistrar"));
+     }
 
     public void setVentanaPrincipal(VentanaPrincipal ventanaPrincipal) {
         this.ventanaPrincipal = ventanaPrincipal;
