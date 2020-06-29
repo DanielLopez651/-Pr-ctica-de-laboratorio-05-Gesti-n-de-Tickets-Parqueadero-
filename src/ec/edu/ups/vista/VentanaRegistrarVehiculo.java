@@ -43,6 +43,11 @@ private ControladorCliente controladorCliente;
         btnRegistrar.setText(mensajes.getString("botonRegistrarVehiculo"));
         btnVolver.setText(mensajes.getString("botonVolver"));
         
+        tablaClientes.getColumnModel().getColumn(0).setHeaderValue(mensajes.getString("menuItemCedula"));
+        tablaClientes.getColumnModel().getColumn(1).setHeaderValue(mensajes.getString("menuItemNombre"));
+        tablaClientes.getColumnModel().getColumn(2).setHeaderValue(mensajes.getString("menuItemDireccion"));
+        tablaClientes.getColumnModel().getColumn(3).setHeaderValue(mensajes.getString("menuItemTelefono"));
+        
     }
 
     @SuppressWarnings("unchecked")

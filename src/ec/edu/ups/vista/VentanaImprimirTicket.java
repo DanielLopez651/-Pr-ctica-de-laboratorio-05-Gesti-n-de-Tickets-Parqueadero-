@@ -28,6 +28,9 @@ public class VentanaImprimirTicket extends javax.swing.JInternalFrame {
          jLabel1.setText(mensajes.getString("menuItemIngresePlacaDeSuVehiculo"));
          jToggleButton1.setText(mensajes.getString("botonAceptar"));
          
+         jTable1.getColumnModel().getColumn(0).setHeaderValue(mensajes.getString("tablaTicket"));
+         jTable1.getColumnModel().getColumn(1).setHeaderValue(mensajes.getString("tablaIngreso"));
+         
      }
     public void actualizar(){
         this.controladorTicket.verTicketsVehiculo((DefaultTableModel) jTable1.getModel());
