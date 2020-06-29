@@ -20,6 +20,8 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
 
     private ControladorVehiculo controladorVehiculo;
 private ControladorCliente controladorCliente;
+private String LleneLosCampos;
+private String vehiculoRegistrado;
 
  private VentanaPrincipal ventanaPrincipal;
  private VentanaRegistrarCliente ventanaRegistrarCliente;
@@ -48,6 +50,10 @@ private ControladorCliente controladorCliente;
         tablaClientes.getColumnModel().getColumn(2).setHeaderValue(mensajes.getString("menuItemDireccion"));
         tablaClientes.getColumnModel().getColumn(3).setHeaderValue(mensajes.getString("menuItemTelefono"));
         
+        LleneLosCampos=mensajes.getString("panelLleneloscampos");
+        vehiculoRegistrado=mensajes.getString("panelvehiculoRegistrado");
+        
+        this.setTitle(mensajes.getString("tituloRegistroVehiculo"));
     }
 
     @SuppressWarnings("unchecked")
@@ -235,11 +241,11 @@ private ControladorCliente controladorCliente;
 	String modelo = txtModelo.getText();
 	String marca = txtMarca.getText();
         if (placa.isEmpty() || marca.isEmpty() || modelo.isEmpty()) {
-             JOptionPane.showMessageDialog(this, "¡Llene todos los campos solicitados!");
+             JOptionPane.showMessageDialog(this, LleneLosCampos);
         }else{
 	String cedula = (String)tablaClientes.getValueAt(tablaClientes.getSelectedRow(), 0);
 	controladorVehiculo.registrar(placa, marca, modelo, cedula);
-	JOptionPane.showMessageDialog(this, "Vehiculo Registrado", "Registro", JOptionPane.INFORMATION_MESSAGE);
+	JOptionPane.showMessageDialog(this, vehiculoRegistrado);
 	limpiar();
         ventanaPrincipal.getVentanaRegistrarVehiculo().actualizar();
         }

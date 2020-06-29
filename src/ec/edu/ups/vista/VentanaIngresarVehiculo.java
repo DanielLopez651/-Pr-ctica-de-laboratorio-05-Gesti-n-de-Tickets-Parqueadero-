@@ -15,18 +15,24 @@ public class VentanaIngresarVehiculo extends javax.swing.JInternalFrame {
     private VehiculoDAO vehiculoDAO;
     
     private TicketDAO ticketDAO;
-    
+    private String vehiculonoencontrado;
+    private String vehiculoIngresado;
      private ControladorTicket controladorTicket;
      
     public VentanaIngresarVehiculo(ControladorVehiculo controladorVehiculo, VentanaPrincipal ventanaPrincipal) {
         initComponents();
-        this.setTitle("Ingreso vehiculo");
+       
       this.controladorVehiculo=controladorVehiculo;
     }
 
  public void cambiarIdioma(Locale localizacion, ResourceBundle mensajes){
-     jLabel1.setText(mensajes.getString("menuItemIngreseCodigoDeSuTicket"));
+     jLabel1.setText(mensajes.getString("menuItemIngresePlacaDeSuVehiculo"));
      jButton1.setText(mensajes.getString("botonIngresar"));
+     
+     vehiculonoencontrado=mensajes.getString("panelvehiculonoencontrado");
+     vehiculoIngresado=mensajes.getString("panelvehiculoIngresado");
+     
+      this.setTitle(mensajes.getString("tituloIngresarVehiculo"));
      
      
     
@@ -93,12 +99,12 @@ public class VentanaIngresarVehiculo extends javax.swing.JInternalFrame {
         
         Vehiculo v= controladorVehiculo.BuscarVehiculoPorPlaca(placa);
         if(v==null){
-            JOptionPane.showMessageDialog(this, "vehiculo no encontrado");
+            JOptionPane.showMessageDialog(this, vehiculonoencontrado);
             jTextField1.setText("");
         }else{
             jTextField1.setText("");
             
-            JOptionPane.showMessageDialog(this, "Vehiculo registrado el codigo de su ticket es:"+v.getTickete().getNumeroT());
+            JOptionPane.showMessageDialog(this, vehiculoIngresado+v.getTickete().getNumeroT());
         }
         
         jTextField1.setText("");

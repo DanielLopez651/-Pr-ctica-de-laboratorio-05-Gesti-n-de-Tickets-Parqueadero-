@@ -84,7 +84,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuItemValidarTicket.setText(mensajes.getString("menuItemValidarTicket"));
         menuItemRegresarSalida.setText(mensajes.getString("menuItemRegresarSalida"));
         menuItemEpañol.setText(mensajes.getString("menuItemEpañol"));
-        menuItemIngles .setText(mensajes.getString("menuItemIngles")); 
+        menuItemIngles .setText(mensajes.getString("menuItemIngles"));
+        registrarVehiculoItem.setText(mensajes.getString("botonRegistrarVehiculo"));
         
         ventanaRegistrarCliente.cambiarIdioma(localizacion, mensajes);
         ventanaRegistrarVehiculo.cambiarIdioma(localizacion, mensajes);

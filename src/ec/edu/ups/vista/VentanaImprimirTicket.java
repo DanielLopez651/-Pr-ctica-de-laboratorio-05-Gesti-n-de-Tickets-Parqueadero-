@@ -12,30 +12,41 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-        
+
 public class VentanaImprimirTicket extends javax.swing.JInternalFrame {
+
     private ControladorVehiculo controladorVehiculo;
     private ControladorTicket controladorTicket;
     DefaultTableModel modelo;
+    private String valorPagar;
+    private String textoFracciones;
+    private String ticketnoEncontrado;
+
     public VentanaImprimirTicket(ControladorTicket controladorTicket, VentanaPrincipal Ventanaprincipal) {
         initComponents();
-        this.controladorTicket=controladorTicket;
-         this.controladorTicket.verTicketsVehiculo((DefaultTableModel) jTable1.getModel());
-//        controladorVehiculo.verVehiculos((DefaultTableModel)jTable1.getModel());
-       
+        this.controladorTicket = controladorTicket;
+        this.controladorTicket.verTicketsVehiculo((DefaultTableModel) jTable1.getModel());
+
     }
-     public void cambiarIdioma(Locale localizacion, ResourceBundle mensajes){
-         jLabel1.setText(mensajes.getString("menuItemIngresePlacaDeSuVehiculo"));
-         jToggleButton1.setText(mensajes.getString("botonAceptar"));
-         
-         jTable1.getColumnModel().getColumn(0).setHeaderValue(mensajes.getString("tablaTicket"));
-         jTable1.getColumnModel().getColumn(1).setHeaderValue(mensajes.getString("tablaIngreso"));
-         
-     }
-    public void actualizar(){
+
+    public void cambiarIdioma(Locale localizacion, ResourceBundle mensajes) {
+        jLabel1.setText(mensajes.getString("menuItemIngresePlacaDeSuVehiculo"));
+        jToggleButton1.setText(mensajes.getString("botonAceptar"));
+
+        jTable1.getColumnModel().getColumn(0).setHeaderValue(mensajes.getString("tablaTicket"));
+        jTable1.getColumnModel().getColumn(1).setHeaderValue(mensajes.getString("tablaIngreso"));
+
+        valorPagar = mensajes.getString("valorPagar");
+        textoFracciones = mensajes.getString("textoFracciones");
+        ticketnoEncontrado = mensajes.getString("ticketnoEncontrado");
+        this.setTitle(mensajes.getString("tituloImprimirTicket"));
+
+    }
+
+    public void actualizar() {
         this.controladorTicket.verTicketsVehiculo((DefaultTableModel) jTable1.getModel());
     }
- 
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -117,25 +128,23 @@ public class VentanaImprimirTicket extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        
-        Ticket ticket=controladorTicket.buscarTicketPorCodigo(Integer.parseInt(jTextField1.getText()));
+
+        Ticket ticket = controladorTicket.buscarTicketPorCodigo(Integer.parseInt(jTextField1.getText()));
         System.out.println(ticket);
         actualizar();
-        if(ticket!=null){
-            double total=controladorTicket.precio(ticket);
-            JOptionPane.showMessageDialog(this,"Valor a pagar: "+total);
-            double fracciones=total/0.25;
-            JOptionPane.showMessageDialog(this,"Las fracciones fueron: "+total);
+        if (ticket != null) {
+            double total = controladorTicket.precio(ticket);
+            JOptionPane.showMessageDialog(this, valorPagar + total);
+            double fracciones = total / 0.25;
+            JOptionPane.showMessageDialog(this, textoFracciones + total);
             jTextField1.setText("");
-            
-            
-        }else{
-            JOptionPane.showMessageDialog(this, "Ticket no encontrado");
+
+        } else {
+            JOptionPane.showMessageDialog(this, ticketnoEncontrado);
             jTextField1.setText("");
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
 

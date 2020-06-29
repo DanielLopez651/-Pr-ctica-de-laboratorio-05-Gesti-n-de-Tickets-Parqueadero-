@@ -12,6 +12,9 @@ public class VentanaRegistrarCliente extends javax.swing.JInternalFrame {
     private ControladorCliente controladorCliente;
     private VentanaPrincipal ventanaPrincipal;
     
+private String textoLleneloscampos;
+
+private String clienteRegistrado;
 
     private Locale localizacion;
     private ResourceBundle mensajes;
@@ -36,6 +39,11 @@ public class VentanaRegistrarCliente extends javax.swing.JInternalFrame {
          
          btnCerrar.setText(mensajes.getString("botonCerrar"));
          btnRegistarCliente.setText(mensajes.getString("botonRegistrar"));
+         
+         textoLleneloscampos=mensajes.getString("panelLleneloscampos");
+         clienteRegistrado=mensajes.getString("panelClienteRegistrrado");
+         
+         this.setTitle(mensajes.getString("tituloRgistrarCliente"));
      }
 
     public void setVentanaPrincipal(VentanaPrincipal ventanaPrincipal) {
@@ -187,10 +195,10 @@ public class VentanaRegistrarCliente extends javax.swing.JInternalFrame {
 	String direccion = txtDireccion.getText();
 	String telefono = txtTelefono.getText();
         if(cedula.isEmpty()||nombre.isEmpty()||direccion.isEmpty()||telefono.isEmpty()){
-            JOptionPane.showMessageDialog(this, "¡Llene todos los campos solicitados!");
+            JOptionPane.showMessageDialog(this, textoLleneloscampos);
         }else{
 	controladorCliente.registrar(cedula, nombre, direccion, telefono);
-	JOptionPane.showMessageDialog(this, "Cliente Registrado", "Registro", JOptionPane.INFORMATION_MESSAGE);
+	JOptionPane.showMessageDialog(this, clienteRegistrado);
 	limpiar();
         dispose();
         ventanaPrincipal.getVentanaRegistrarVehiculo().actualizar();
