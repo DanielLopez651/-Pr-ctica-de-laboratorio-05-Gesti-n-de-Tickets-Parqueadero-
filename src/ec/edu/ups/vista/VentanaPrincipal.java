@@ -67,13 +67,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 	
 	ventanaRegistrarVehiculo.setVentanaPrincipal(this);
         calendario = new GregorianCalendar();
-        localizacion = Locale.getDefault();
         
-	mensajes = ResourceBundle.getBundle("ec.edu.ups.idiomas.mensajes",localizacion);
-       cambiarIdioma();
+        
+        localizacion = Locale.getDefault();
+        System.out.println(localizacion.getCountry());
+	System.out.println(localizacion.getLanguage());
+        mensajes = ResourceBundle.getBundle("ec.edu.ups.idiomas.mensajes",localizacion);
+       //cambiarIdioma();
     }
     public void cambiarIdioma(){
-        ingresoMenu.setText(mensajes.getString("ingresoMenu"));
+        ingresoMenu.setText(mensajes.getString("menuIngreso"));
         menuItemSalida.setText(mensajes.getString("menuItemSalida"));
         ayudaMenu.setText(mensajes.getString("ayudaMenu"));
         registrarMenuItem.setText(mensajes.getString("registrarMenuItem"));
@@ -81,9 +84,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuItemSalirI.setText(mensajes.getString("menuItemSalirI"));
         menuItemValidarTicket.setText(mensajes.getString("menuItemValidarTicket"));
         menuItemRegresarSalida.setText(mensajes.getString("menuItemRegresarSalida"));
-        menuItemEpañol.setText(mensajes.getString(" menuItemEpañol"));
-        menuItemIngles .setText(mensajes.getString("menuItemIngles")); 
-        
+       //menuItemEpañol.setText(mensajes.getString(" menuItemEpañol"));
+       // menuItemIngles .setText(mensajes.getString("menuItemIngles")); 
+//        
     }
    
 
