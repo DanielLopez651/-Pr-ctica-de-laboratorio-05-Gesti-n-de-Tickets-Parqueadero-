@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 public class VentanaRegistrarCliente extends javax.swing.JInternalFrame {
     private ControladorCliente controladorCliente;
     private VentanaPrincipal ventanaPrincipal;
-    private VentanaIniciarSesion ventanaIniciarSesion;
+    
 
     private Locale localizacion;
     private ResourceBundle mensajes;
@@ -180,28 +180,19 @@ public class VentanaRegistrarCliente extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistarClienteActionPerformed
-//        String cedula=txtCedula.getText();
-//         String nombre=txtNombre.getText();
-//         String direccion= txtDireccion.getText();
-//         String telefono=txtTelefono.getText();
-//        if(cedula.isEmpty()||nombre.isEmpty()||direccion.isEmpty()||telefono.isEmpty()){
-//             JOptionPane.showMessageDialog(this, "¡Llene todos los campos solicitados!");
-//        }else{
-//            controladorCliente.registrar(cedula, nombre, direccion, telefono);
-//        JOptionPane.showMessageDialog(this, "Usuario creado");
-//        
-//        limpiar();
-//       this.setVisible(false);
-//        }
         String cedula = txtCedula.getText();
 	String nombre = txtNombre.getText();
 	String direccion = txtDireccion.getText();
 	String telefono = txtTelefono.getText();
+        if(cedula.isEmpty()||nombre.isEmpty()||direccion.isEmpty()||telefono.isEmpty()){
+            JOptionPane.showMessageDialog(this, "¡Llene todos los campos solicitados!");
+        }else{
 	controladorCliente.registrar(cedula, nombre, direccion, telefono);
 	JOptionPane.showMessageDialog(this, "Cliente Registrado", "Registro", JOptionPane.INFORMATION_MESSAGE);
 	limpiar();
         dispose();
         ventanaPrincipal.getVentanaRegistrarVehiculo().actualizar();
+        }
     }//GEN-LAST:event_btnRegistarClienteActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed

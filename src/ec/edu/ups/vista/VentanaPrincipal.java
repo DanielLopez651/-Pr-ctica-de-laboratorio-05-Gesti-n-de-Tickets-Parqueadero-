@@ -19,7 +19,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     //ventanas
     private VentanaRegistrarCliente ventanaRegistrarCliente;
     private VentanaRegistrarVehiculo ventanaRegistrarVehiculo;
-    private VentanaIniciarSesion ventanaIniciarSesion;
+  
     private VentanaImprimirTicket ventanaimprimirTicket;
     private VentanaVehiculos ventanaVehiculos;
     private VentanaIngresarVehiculo ventanaIngresarVehiculo;
@@ -51,7 +51,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         //instancia las vistas
         ventanaRegistrarVehiculo = new VentanaRegistrarVehiculo(controladorCliente, controladorVehiculo);
-        ventanaIniciarSesion = new VentanaIniciarSesion(controladorCliente, this);
+      
         ventanaRegistrarCliente = new VentanaRegistrarCliente(controladorCliente);
         ventanaRegistrarVehiculo=new VentanaRegistrarVehiculo(controladorCliente, controladorVehiculo);
         ventanaimprimirTicket = new VentanaImprimirTicket(controladorTicket, this);
@@ -60,7 +60,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      
         //añadir a destokpane
        
-        desktopPane.add(ventanaIniciarSesion);
+        
      
         
 	ventanaRegistrarCliente.setVentanaPrincipal(this);
@@ -69,12 +69,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         calendario = new GregorianCalendar();
         
         
-        localizacion = Locale.getDefault();
-        mensajes = ResourceBundle.getBundle("ec.edu.ups.idiomas.mensajes",localizacion);
+        localizacion = new Locale("es","EC");
+        
+      mensajes = ResourceBundle.getBundle("ec.edu.ups.idiomas.mensajes",localizacion);
        cambiarIdioma();
     }
     public void cambiarIdioma(){
-        ingresoMenu.setText(mensajes.getString("menuIngreso"));
+       ingresoMenu.setText(mensajes.getString("ingresoMenu"));
         menuItemSalida.setText(mensajes.getString("menuItemSalida"));
         ayudaMenu.setText(mensajes.getString("ayudaMenu"));
         registrarMenuItem.setText(mensajes.getString("registrarMenuItem"));
