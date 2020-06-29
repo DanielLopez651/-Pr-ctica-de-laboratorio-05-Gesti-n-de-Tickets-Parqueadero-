@@ -3,6 +3,8 @@ import ec.edu.ups.controlador.*;
 import ec.edu.ups.dao.TicketDAO;
 import ec.edu.ups.dao.VehiculoDAO;
 import ec.edu.ups.modelo.Vehiculo;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 
 public class VentanaIngresarVehiculo extends javax.swing.JInternalFrame {
@@ -22,7 +24,13 @@ public class VentanaIngresarVehiculo extends javax.swing.JInternalFrame {
       this.controladorVehiculo=controladorVehiculo;
     }
 
-
+ public void cambiarIdioma(Locale localizacion, ResourceBundle mensajes){
+     jLabel1.setText(mensajes.getString("menuItemIngreseCodigoDeSuTicket"));
+     jButton1.setText(mensajes.getString("botonIngresar"));
+     
+     
+    
+}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

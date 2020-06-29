@@ -8,6 +8,8 @@ package ec.edu.ups.vista;
 import ec.edu.ups.controlador.ControladorTicket;
 import ec.edu.ups.controlador.ControladorVehiculo;
 import ec.edu.ups.modelo.Ticket;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
         
@@ -22,6 +24,11 @@ public class VentanaImprimirTicket extends javax.swing.JInternalFrame {
 //        controladorVehiculo.verVehiculos((DefaultTableModel)jTable1.getModel());
        
     }
+     public void cambiarIdioma(Locale localizacion, ResourceBundle mensajes){
+         jLabel1.setText(mensajes.getString("menuItemIngresePlacaDeSuVehiculo"));
+         jToggleButton1.setText(mensajes.getString("botonAceptar"));
+         
+     }
     public void actualizar(){
         this.controladorTicket.verTicketsVehiculo((DefaultTableModel) jTable1.getModel());
     }

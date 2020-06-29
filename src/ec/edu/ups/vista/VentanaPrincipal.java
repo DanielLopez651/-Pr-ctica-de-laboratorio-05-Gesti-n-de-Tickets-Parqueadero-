@@ -87,6 +87,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
         ventanaRegistrarCliente.cambiarIdioma(localizacion, mensajes);
         ventanaRegistrarVehiculo.cambiarIdioma(localizacion, mensajes);
+        ventanaIngresarVehiculo.cambiarIdioma(localizacion, mensajes);
+        ventanaimprimirTicket.cambiarIdioma(localizacion, mensajes);
        
 //        
     }
