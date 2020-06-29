@@ -86,6 +86,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuItemRegresarSalida.setText(mensajes.getString("menuItemRegresarSalida"));
         menuItemEpañol.setText(mensajes.getString("menuItemEpañol"));
         menuItemIngles .setText(mensajes.getString("menuItemIngles")); 
+        System.out.println("asd");
 //        
     }
    
