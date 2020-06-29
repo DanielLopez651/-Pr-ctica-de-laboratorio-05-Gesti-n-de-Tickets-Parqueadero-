@@ -9,6 +9,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.ResourceBundle;
+
+
 import javax.swing.JMenuItem;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
@@ -36,12 +38,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public VentanaPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
-        //visibilidad
-//        registrarVehiculoItem.setVisible(false);
-//        MenuItemCerrarSesion.setVisible(false);
-//        menuItemVehiculos.setVisible(false);
-       
-        
+      
         //instancia DAOS
         clienteDAO = new ClienteDAO();
         vehiculoDAO = new VehiculoDAO();
@@ -60,24 +57,34 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventanaimprimirTicket = new VentanaImprimirTicket(controladorTicket, this);
         ventanaVehiculos = new VentanaVehiculos();
         ventanaIngresarVehiculo=new VentanaIngresarVehiculo(controladorVehiculo, this);
-        
-
+     
         //añadir a destokpane
        
         desktopPane.add(ventanaIniciarSesion);
-        
-        
-       
-        
+     
         
 	ventanaRegistrarCliente.setVentanaPrincipal(this);
 	
-	
 	ventanaRegistrarVehiculo.setVentanaPrincipal(this);
         calendario = new GregorianCalendar();
-
+        localizacion = Locale.getDefault();
+        
+	mensajes = ResourceBundle.getBundle("ec.edu.ups.idiomas.mensajes",localizacion);
+       cambiarIdioma();
     }
-
+    public void cambiarIdioma(){
+        ingresoMenu.setText(mensajes.getString("ingresoMenu"));
+        menuItemSalida.setText(mensajes.getString("menuItemSalida"));
+        ayudaMenu.setText(mensajes.getString("ayudaMenu"));
+        registrarMenuItem.setText(mensajes.getString("registrarMenuItem"));
+        menuItemIngresoVehiculo.setText(mensajes.getString("menuItemIngresoVehiculo"));
+        menuItemSalirI.setText(mensajes.getString("menuItemSalirI"));
+        menuItemValidarTicket.setText(mensajes.getString("menuItemValidarTicket"));
+        menuItemRegresarSalida.setText(mensajes.getString("menuItemRegresarSalida"));
+        menuItemEpañol.setText(mensajes.getString(" menuItemEpañol"));
+        menuItemIngles .setText(mensajes.getString("menuItemIngles")); 
+        
+    }
    
 
    
@@ -90,9 +97,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         return registrarVehiculoItem;
     }
 
-//    public JMenuItem getMenuItemVehiculos() {
-//        return menuItemVehiculos;
-//    }
+
 
     public VentanaRegistrarVehiculo getVentanaRegistrarVehiculo() {
         return ventanaRegistrarVehiculo;
@@ -108,13 +113,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ingresoMenu = new javax.swing.JMenu();
         registrarMenuItem = new javax.swing.JMenuItem();
         registrarVehiculoItem = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        menuItemIngresoVehiculo = new javax.swing.JMenuItem();
         menuItemSalirI = new javax.swing.JMenuItem();
         menuItemSalida = new javax.swing.JMenu();
         menuItemValidarTicket = new javax.swing.JMenuItem();
         menuItemRegresarSalida = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
-        contentMenuItem = new javax.swing.JMenuItem();
+        ayudaMenu = new javax.swing.JMenu();
+        menuItemEpañol = new javax.swing.JMenuItem();
+        menuItemIngles = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
@@ -142,13 +148,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         ingresoMenu.add(registrarVehiculoItem);
 
-        jMenuItem1.setText("Ingresar Vehiculo");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuItemIngresoVehiculo.setText("Ingresar Vehiculo");
+        menuItemIngresoVehiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menuItemIngresoVehiculoActionPerformed(evt);
             }
         });
-        ingresoMenu.add(jMenuItem1);
+        ingresoMenu.add(menuItemIngresoVehiculo);
 
         menuItemSalirI.setMnemonic('x');
         menuItemSalirI.setText("Salir");
@@ -184,19 +190,32 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         menuBar.add(menuItemSalida);
 
-        helpMenu.setMnemonic('h');
-        helpMenu.setText("Ayuda");
-        helpMenu.addActionListener(new java.awt.event.ActionListener() {
+        ayudaMenu.setMnemonic('h');
+        ayudaMenu.setText("Ayuda");
+        ayudaMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                helpMenuActionPerformed(evt);
+                ayudaMenuActionPerformed(evt);
             }
         });
 
-        contentMenuItem.setMnemonic('c');
-        contentMenuItem.setText("Contactenos");
-        helpMenu.add(contentMenuItem);
+        menuItemEpañol.setMnemonic('c');
+        menuItemEpañol.setText("Español");
+        menuItemEpañol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemEpañolActionPerformed(evt);
+            }
+        });
+        ayudaMenu.add(menuItemEpañol);
 
-        menuBar.add(helpMenu);
+        menuItemIngles.setText("Ingles");
+        menuItemIngles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemInglesActionPerformed(evt);
+            }
+        });
+        ayudaMenu.add(menuItemIngles);
+
+        menuBar.add(ayudaMenu);
 
         setJMenuBar(menuBar);
 
@@ -207,9 +226,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_menuItemSalirIActionPerformed
 
-    private void helpMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpMenuActionPerformed
+    private void ayudaMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ayudaMenuActionPerformed
 
-    }//GEN-LAST:event_helpMenuActionPerformed
+    }//GEN-LAST:event_ayudaMenuActionPerformed
 
     private void menuItemRegresarSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRegresarSalidaActionPerformed
         System.exit(0);
@@ -232,12 +251,25 @@ desktopPane.add(ventanaimprimirTicket);
         ventanaimprimirTicket.setVisible(true);
     }//GEN-LAST:event_menuItemValidarTicketActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void menuItemIngresoVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemIngresoVehiculoActionPerformed
         desktopPane.add(ventanaIngresarVehiculo);
         ventanaIngresarVehiculo.setVisible(true);
         
         
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_menuItemIngresoVehiculoActionPerformed
+
+    private void menuItemInglesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemInglesActionPerformed
+    localizacion = new Locale("en","UK");
+	mensajes = ResourceBundle.getBundle("ec.edu.ups.idiomas.mensajes", localizacion);
+	cambiarIdioma();
+    }//GEN-LAST:event_menuItemInglesActionPerformed
+
+    private void menuItemEpañolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemEpañolActionPerformed
+       
+        localizacion = new Locale("es","EC");
+	mensajes = ResourceBundle.getBundle("ec.edu.ups.idiomas.mensajes", localizacion);
+	cambiarIdioma();
+    }//GEN-LAST:event_menuItemEpañolActionPerformed
 
     public static void main(String args[]) {
 
@@ -268,12 +300,13 @@ desktopPane.add(ventanaimprimirTicket);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem contentMenuItem;
+    private javax.swing.JMenu ayudaMenu;
     private javax.swing.JDesktopPane desktopPane;
-    private javax.swing.JMenu helpMenu;
     private javax.swing.JMenu ingresoMenu;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem menuItemEpañol;
+    private javax.swing.JMenuItem menuItemIngles;
+    private javax.swing.JMenuItem menuItemIngresoVehiculo;
     private javax.swing.JMenuItem menuItemRegresarSalida;
     private javax.swing.JMenu menuItemSalida;
     private javax.swing.JMenuItem menuItemSalirI;
